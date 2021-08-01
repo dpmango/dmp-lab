@@ -1,7 +1,15 @@
 <template>
-  <div class="page dashboard">
+  <div class="page">
     <div class="page__content">
-      <slot />
+      <Header />
+      <div class="dashboard">
+        <div class="dashboard__sidebar">
+          <Sidebar />
+        </div>
+        <div class="dashboard__content">
+          <slot />
+        </div>
+      </div>
     </div>
   </div>
 </template>

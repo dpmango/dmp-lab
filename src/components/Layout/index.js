@@ -1,4 +1,4 @@
-import DashboardHeader from "./DashboardHeader"
-// import Loader from "./Loader"
+import Header from "./Header"
+import Sidebar from "./Sidebar"
 
-export { DashboardHeader }
+export { Header, Sidebar }
