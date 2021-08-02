@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   data() {
@@ -53,7 +53,14 @@ export default {
       error: null,
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters("auth", ["isAuthenticated"]),
+  },
+  created() {
+    if (this.isAuthenticated) {
+      this.$router.push("/dashboard")
+    }
+  },
   methods: {
     async handleSubmit() {
       const isValid = await this.$refs.form.validate()

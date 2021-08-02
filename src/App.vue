@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapActions, mapGetters } from "vuex"
 import { ScrollTo } from "@/utils"
 
 export default {
@@ -13,6 +13,8 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch("init")
+
     this.$router.beforeEach((to, from, next) => {
       if (to.meta && to.meta.protected && !this.isAuthenticated) next({ name: "Login" })
       else next()
@@ -23,6 +25,9 @@ export default {
   },
   computed: {
     ...mapGetters("auth", ["isAuthenticated"]),
+  },
+  methods: {
+    ...mapActions("auth", ["checkToken"]),
   },
   watch: {
     $route() {

@@ -47,6 +47,13 @@ const mutations = {
 }
 
 const actions = {
+  checkToken({ commit }) {
+    const token = localStorage.getItem("auth_token", null)
+
+    if (token) {
+      commit("updateToken", token)
+    }
+  },
   async login({ commit }, request) {
     const [err, result] = await loginService(request)
 
