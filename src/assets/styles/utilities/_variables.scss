@@ -2,9 +2,9 @@
 $mobile-s: 475;
 $sm: 575;
 $md: 767;
-$lg: 992;
-$xl: 1200;
-$hd: 1440;
+$lg: 1366;
+$xl: 1440;
+$hd: 1640;
 
 // FONTS
 $baseFont: "Montserrat", sans-serif;
@@ -17,15 +17,15 @@ $ease: ease-in-out;
 // COLORS
 // Color-names https://htmlcolorcodes.com/color-names/
 $fontColor: #191D2A;
-$colorGray: #939598;
+$colorGray: #afafaf;
 $colorPrimary: #FF7F57;
 $colorPrimaryHover: #F1754F;
-$colorAccent: teal;
+$colorAccent: #B5C6FF;
 $colorGreen: #00AD45;
 $colorRed: #F15525;
 $colorRedHover: lighten($colorRed, 15%);
-$borderColor: rgba($fontColor, .08);
-$colorBg: #FAFAFA;
+$borderColor: #D1D1D1;
+$colorBg: #F5F7FB;
 
 // SOCIAL colors
 $twitter: #00aced;

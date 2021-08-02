@@ -7,11 +7,17 @@ const routes = [
     name: "Home",
     component: Home,
   },
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   component: () => import(/* webpackChunkName: "about" */ "@/views/About.vue"),
-  // },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/Login.vue"),
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("@/views/Dashboard.vue"),
+    meta: { protected: true },
+  },
 ]
 
 const router = createRouter({

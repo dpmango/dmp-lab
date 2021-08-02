@@ -1,4 +1,7 @@
 import SvgIcon from "./SvgIcon"
-// import Loader from "./Loader"
+import UiInput from "./Input"
+import UiButton from "./Button"
+import Error from "./Error"
+import UiLoader from "./Loader"
 
-export { SvgIcon }
+export { SvgIcon, UiInput, UiButton, Error, UiLoader }

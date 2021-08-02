@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
 import { ScrollTo } from "@/utils"
 
 export default {
@@ -11,8 +12,17 @@ export default {
       loading: true,
     }
   },
+  created() {
+    this.$router.beforeEach((to, from, next) => {
+      if (to.meta && to.meta.protected && !this.isAuthenticated) next({ name: "Login" })
+      else next()
+    })
+  },
   async mounted() {
     // await this.$store.dispatch("init")
+  },
+  computed: {
+    ...mapGetters("auth", ["isAuthenticated"]),
   },
   watch: {
     $route() {

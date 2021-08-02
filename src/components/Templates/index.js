@@ -1,4 +1,4 @@
 import DashboardTemplate from "./Dashboard"
-// import Loader from "./Loader"
+import AuthTemplate from "./Auth"
 
-export { DashboardTemplate }
+export { DashboardTemplate, AuthTemplate }
