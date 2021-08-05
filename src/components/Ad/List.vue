@@ -34,7 +34,7 @@ export default {
       selectedRows: [],
       pagination: {
         current: 1,
-        total: 3,
+        total: 30,
       },
     }
   },

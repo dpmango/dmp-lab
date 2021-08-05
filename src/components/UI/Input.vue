@@ -159,11 +159,12 @@ export default {
   position: relative;
   &__label {
     display: block;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 600;
     line-height: 16px;
     font-family: $baseFont;
-    color: $colorGray;
-    margin-bottom: 5px;
+    color: $fontColor;
+    margin-bottom: 15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -177,7 +178,7 @@ export default {
       -webkit-appearance: none;
       display: block;
       width: 100%;
-      padding: 18px 16px;
+      padding: 17px 16px 16px;
       border: 1px solid $borderColor;
       background: white;
       border-radius: 4px;
@@ -203,9 +204,11 @@ export default {
       &[readonly],
       &[disabled] {
         color: $colorGray;
+        background: $colorBg;
+        border-color: transparent;
         &:focus,
         &:active {
-          border-color: transparent;
+          border-color: $borderColor;
         }
       }
     }
@@ -257,7 +260,7 @@ export default {
     }
     .svg-icon {
       font-size: 16px;
-      color: $colorGray;
+      color: $colorPrimary;
     }
   }
   &__clear {
@@ -305,6 +308,8 @@ export default {
       top: 19px;
       left: 16px;
       font-size: 14px;
+      font-weight: 500;
+      color: $colorGray;
       z-index: 2;
       pointer-events: none;
       transition: all 0.25s ease-in-out;
@@ -328,7 +333,7 @@ export default {
         font-size: 11px;
       }
     }
-    &.is-iconed {
+    &.is-iconed.left {
       .input__label {
         left: 45px;
       }

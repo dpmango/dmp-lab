@@ -9,14 +9,17 @@
           <li>
             <router-link to="/">Начало работы</router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link to="/">Новости</router-link>
-          </li>
+          </li> -->
           <li>
-            <router-link to="/">Задать вопрос</router-link>
+            <router-link to="/support">Задать вопрос</router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link to="/">Сотрудничество</router-link>
+          </li> -->
+          <li>
+            <router-link to="/ui">Интерфейс</router-link>
           </li>
         </ul>
       </div>

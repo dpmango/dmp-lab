@@ -8,6 +8,11 @@ const routes = [
     component: Home,
   },
   {
+    path: "/ui",
+    name: "Ui",
+    component: () => import("@/views/Ui.vue"),
+  },
+  {
     path: "/login",
     name: "Login",
     component: () => import("@/views/Login.vue"),
@@ -16,6 +21,18 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: () => import("@/views/Dashboard.vue"),
+    meta: { protected: true },
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: () => import("@/views/Profile.vue"),
+    meta: { protected: true },
+  },
+  {
+    path: "/support",
+    name: "Support",
+    component: () => import("@/views/Support.vue"),
     meta: { protected: true },
   },
 ]

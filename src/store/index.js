@@ -1,5 +1,6 @@
 import { createStore } from "vuex"
 import auth from "./auth"
+import router from "./router"
 import ads from "./ads"
 
 export default createStore({
@@ -12,6 +13,7 @@ export default createStore({
   },
   modules: {
     auth,
+    router,
     ads,
   },
 })
