@@ -3,7 +3,16 @@
     :class="['button', theme, size, isBlock, noPadding, { 'is-loading': showLoader }]"
     v-bind="$attrs"
   >
-    <slot />
+    <div class="button__icon left" v-if="iconLeft">
+      <SvgIcon :name="iconLeftName" :style="iconLeftStyle" />
+    </div>
+    <div class="button__text">
+      <slot />
+    </div>
+    <div class="button__icon right" v-if="iconRight">
+      <SvgIcon :name="iconRightName" :style="iconRightStyle" />
+    </div>
+
     <UiLoader v-if="showLoader" :loading="showLoader" :color="loaderColor" />
   </button>
 </template>
@@ -20,12 +29,20 @@ export default {
     theme: {
       type: String,
       default: "primary",
-      validator: (theme) => ["primary", "outline", "danger", "success"].includes(theme),
+      validator: (theme) => ["primary", "outline", "danger", "success", "clear"].includes(theme),
     },
     size: {
       type: String,
       default: "regular",
       validator: (theme) => ["regular", "small", "big"].includes(theme),
+    },
+    iconLeft: {
+      type: String,
+      required: false,
+    },
+    iconRight: {
+      type: String,
+      required: false,
     },
     isLoading: {
       type: Boolean,
@@ -43,6 +60,28 @@ export default {
     }
   },
   computed: {
+    iconLeftName() {
+      return this.iconLeft.split(":")[0]
+    },
+    iconLeftStyle() {
+      const splitClassname = this.iconLeft.split(":")
+      if (splitClassname[1]) {
+        return { fontSize: splitClassname[1] + "px" }
+      }
+
+      return {}
+    },
+    iconRightName() {
+      return this.iconRight.split(":")[0]
+    },
+    iconRightStyle() {
+      const splitClassname = this.iconRight.split(":")
+      if (splitClassname[1]) {
+        return { fontSize: splitClassname[1] + "px" }
+      }
+
+      return {}
+    },
     isBlock() {
       if (this.$attrs.block !== undefined) {
         return "block"
@@ -92,14 +131,19 @@ export default {
     outline: none;
   }
 
-  ::v-deep span {
-    display: inline-block;
-    margin-right: 7px;
-  }
-  ::v-deep svg {
-    width: 15px;
-    vertical-align: middle;
-    transition: stroke 0.25s $ease;
+  &__icon {
+    flex: 0 0 auto;
+    font-size: 0px;
+    transition: color 0.25s $ease;
+    .svg-icon {
+      font-size: 16px;
+    }
+    &.left {
+      margin-right: 8px;
+    }
+    &.right {
+      margin-left: 8px;
+    }
   }
 
   &.primary {
@@ -135,10 +179,6 @@ export default {
       background: rgba($colorRed, 0.9);
     }
   }
-  &.no-padding {
-    padding: 0;
-  }
-
   &.success {
     color: white;
     background: $colorGreen;
@@ -151,9 +191,28 @@ export default {
     }
   }
 
+  &.clear {
+    background: transparent;
+    border-color: transparent;
+    color: $fontColor;
+    .button__icon {
+      color: #dadada;
+    }
+    &:hover {
+      background: $colorBg;
+      .button__icon {
+        color: $colorPrimary;
+      }
+    }
+    &:active {
+      background: darken($colorBg, 5%);
+    }
+  }
+
   &.small {
-    font-size: 15px;
-    padding: 7px 14px;
+    font-size: 14px;
+    padding: 9px 16px;
+    border-radius: 6px;
   }
   &.big {
     font-size: 18px;
@@ -163,6 +222,10 @@ export default {
   &.block {
     display: block;
     width: 100%;
+  }
+
+  &.no-padding {
+    padding: 0;
   }
 
   &[disabled] {

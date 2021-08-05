@@ -3,7 +3,7 @@
     <div class="auth__title h2-title">Войти</div>
 
     <Form ref="form" as="form" class="auth__form" @submit="handleSubmit">
-      <Error :error="error" />
+      <UiError :error="error" />
 
       <Field
         v-model="email"

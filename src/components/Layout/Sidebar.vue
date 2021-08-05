@@ -36,7 +36,7 @@
     </ul>
 
     <div class="sidebar__bottom">
-      <router-link to="/" class="link">
+      <router-link to="/support" class="link">
         <i class="link__icon">
           <SvgIcon name="support" />
         </i>
@@ -79,7 +79,6 @@
     margin-top: 24px;
     font-size: 12px;
     line-height: 1.4;
-    letter-spacing: -0.04em;
     color: $colorGray;
     span {
       display: block;
@@ -91,7 +90,6 @@
     font-size: 12px;
     line-height: 1.4;
     font-weight: 500;
-    letter-spacing: -0.04em;
     text-decoration-line: underline;
     transition: color 0.25s $ease;
     &:hover {
@@ -131,7 +129,9 @@
     letter-spacing: 0.03em;
     text-transform: uppercase;
   }
-  &:hover {
+
+  &:hover,
+  &.router-link-active {
     .link__icon {
       color: white;
       background: $colorPrimary;

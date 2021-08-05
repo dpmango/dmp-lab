@@ -9,15 +9,18 @@
     "deploy": "yarn build && cp ./dist/index.html ./dist/200.html && surge --project ./dist --domain dmp-lab.surge.sh"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.3",
     "@vee-validate/rules": "^4.4.7",
     "axios": "^0.21.1",
     "core-js": "^3.16.0",
     "lodash": "^4.17.21",
     "svg4everybody": "^2.1.9",
+    "v-calendar": "^3.0.0-alpha.5",
     "vee-validate": "^4.4.8",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vue-spinner": "^1.0.4",
+    "vue-toastification": "^2.0.0-rc.1",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

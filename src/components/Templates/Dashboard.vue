@@ -54,8 +54,7 @@ export default {
     flex: 0 0 calc(100% - 336px);
     max-width: calc(100% - 336px);
     background: #f5f7fb;
-    padding-left: 40px;
-    padding-right: 56px;
+    padding: 32px 56px 32px 40px;
   }
 }
 

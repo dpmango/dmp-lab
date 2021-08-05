@@ -79,6 +79,7 @@ export default {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 9;
   background: $colorPrimary;
   color: white;
   &__wrapper {
@@ -151,8 +152,6 @@ export default {
     padding-right: 12px;
     font-weight: bold;
     font-size: 16px;
-    line-height: (20 / 16);
-    letter-spacing: -0.01em;
     .svg-icon {
       opacity: 0.6;
       font-size: 12px;
