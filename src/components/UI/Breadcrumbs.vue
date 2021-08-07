@@ -134,4 +134,21 @@ export default {
     content: "";
   }
 }
+
+@include r($hd) {
+  .breadcrumbs {
+    &__title {
+      margin-top: 12px;
+    }
+  }
+  .crumb {
+    &__separator {
+      margin-left: 12px;
+      margin-right: 12px;
+    }
+    &__title {
+      font-size: 14px;
+    }
+  }
+}
 </style>

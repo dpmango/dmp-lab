@@ -29,6 +29,16 @@
   font-size: 22px;
 }
 
+@include r($hd){
+  .h2-title{
+    font-size: 20px;
+  }
+  
+  .h3-title{
+    font-size: 16px;
+  }
+}
+
 // +r($lg)
 //   .h1-title
 //     font-size: 44px

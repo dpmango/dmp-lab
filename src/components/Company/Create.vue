@@ -3,7 +3,7 @@
     <UiBreadcrumbs :list="crumbs" />
 
     <Form ref="form" as="form" class="create__content" @submit="handleSubmit">
-      <div class="row create__main-row">
+      <div class="row">
         <div class="col col-8">
           <div class="panel">
             <h3 class="panel__title h3-title">Название кампании</h3>
@@ -34,7 +34,7 @@
               <div class="h5-title">Укажите лимит</div>
               <div class="limits mt-1">
                 <div class="row">
-                  <div class="col col-4">
+                  <div class="col col-5">
                     <UiRadioGroup
                       label="Выберите тип"
                       :activeId="limitTypeId"
@@ -42,35 +42,39 @@
                       @onChange="(id) => (limitTypeId = id)"
                     />
                   </div>
-                  <div class="col col-4">
-                    <Field
-                      v-model="limit"
-                      name="limit"
-                      v-slot="{ errorMessage, field }"
-                      rules="required"
-                    >
-                      <UiNumberInput
-                        label="Установите общий лимит"
-                        :helper="getLimitHelperText"
-                        :error="errorMessage"
-                        v-bind="field"
-                      />
-                    </Field>
-                  </div>
-                  <div class="col col-4">
-                    <Field
-                      v-model="limitTotal"
-                      name="limitTotal"
-                      v-slot="{ errorMessage, field }"
-                      rules="required"
-                    >
-                      <UiNumberInput
-                        label="Установите лимит"
-                        :helper="getLimitHelperText"
-                        :error="errorMessage"
-                        v-bind="field"
-                      />
-                    </Field>
+                  <div class="col col-7">
+                    <div class="row">
+                      <div class="col col-6">
+                        <Field
+                          v-model="limit"
+                          name="limit"
+                          v-slot="{ errorMessage, field }"
+                          rules="required"
+                        >
+                          <UiNumberInput
+                            label="Установите лимит"
+                            :helper="getLimitHelperText"
+                            :error="errorMessage"
+                            v-bind="field"
+                          />
+                        </Field>
+                      </div>
+                      <div class="col col-6">
+                        <Field
+                          v-model="limitTotal"
+                          name="limitTotal"
+                          v-slot="{ errorMessage, field }"
+                          rules="required"
+                        >
+                          <UiNumberInput
+                            label="Установите общий лимит"
+                            :helper="getLimitHelperText"
+                            :error="errorMessage"
+                            v-bind="field"
+                          />
+                        </Field>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -213,42 +217,16 @@
             <h3 class="panel__title h3-title">Основные настройки</h3>
 
             <div class="panel__section">
-              <div class="summary">
-                <div class="summary__label">Суточный лимит</div>
-                <div class="summary__value" :class="!summary.limit && 'disabled'">
-                  {{ summary.limit || "не указан" }}
-                </div>
-              </div>
-              <div class="summary">
-                <div class="summary__label">Суточный лимит</div>
-                <div class="summary__value" :class="!summary.limitTotal && 'disabled'">
-                  {{ summary.limitTotal || "не указан" }}
-                </div>
-              </div>
-              <div class="summary">
-                <div class="summary__label">Ставка</div>
-                <div class="summary__value">{{ summary.pricePoint }}</div>
-              </div>
-              <div class="summary">
-                <div class="summary__label">Стратегия</div>
-                <div class="summary__value">{{ summary.strategy }}</div>
-              </div>
-              <div class="summary">
-                <div class="summary__label">Распределение</div>
-                <div class="summary__value">{{ summary.allocation }}</div>
-              </div>
-              <div class="summary">
-                <div class="summary__label">Период</div>
-                <div class="summary__value" :class="!summary.period && 'disabled'">
-                  {{ summary.period || "не указан" }}
-                </div>
-              </div>
-              <div class="summary">
-                <div class="summary__label">Частота показов</div>
-                <div class="summary__value" :class="!summary.frequencyHours && 'disabled'">
-                  {{ summary.frequencyTimes }} {{ summary.frequencyHours || "не указан" }}
-                </div>
-              </div>
+              <Summary
+                :limit="limit"
+                :limitTotal="limitTotal"
+                :limitTypeId="limitTypeId"
+                :frequencyTimes="frequencyTimes"
+                :frequencyHours="frequencyHours"
+                :strategyByView="strategyByView"
+                :allocationTypeOptions="allocationTypeOptions"
+                :allocationTypeId="allocationTypeId"
+              />
             </div>
           </div>
         </div>
@@ -263,9 +241,10 @@
 </template>
 
 <script>
-import { Plurize } from "@/utils"
+import Summary from "./partials/Summary"
 
 export default {
+  components: { Summary },
   data() {
     return {
       crumbs: [
@@ -316,50 +295,6 @@ export default {
           return "показов"
         default:
           return null
-      }
-    },
-    getLimitPLural() {
-      switch (this.limitTypeId) {
-        case 1:
-          return ["рубль", "рубля", "рублей"]
-        case 2:
-          return ["клик", "клика", "кликов"]
-        case 3:
-          return ["показ", "показа", "показов"]
-        default:
-          return null
-      }
-    },
-    summary() {
-      const limitPlural = Plurize(parseInt(this.limit), ...this.getLimitPLural)
-      const limitTotalPlural = Plurize(parseInt(this.limitTotal), ...this.getLimitPLural)
-      const frequencyTimesPlural = Plurize(
-        parseInt(this.frequencyTimes),
-        "показа",
-        "показов",
-        "показов"
-      )
-      const frequencyHoursPlural = Plurize(parseInt(this.frequencyHours), "час", "часа", "часов")
-
-      const limit = this.limit && `${this.limit} ${limitPlural}`
-      const limitTotal = this.limitTotal && `${this.limitTotal} ${limitTotalPlural}`
-      const strategy = this.strategyByView ? "CPM" : "CPC"
-      const allocation = this.allocationTypeOptions.find((x) => x.id === this.allocationTypeId)
-      const period = null
-      const frequencyTimes =
-        this.frequencyTimes && `Не более ${this.frequencyTimes} ${frequencyTimesPlural}`
-      const frequencyHours =
-        this.frequencyHours && `в ${this.frequencyHours} ${frequencyHoursPlural}`
-
-      return {
-        limit,
-        limitTotal,
-        pricePoint: "20 Р", // TODO - static value for now
-        strategy,
-        allocation: allocation && allocation.label,
-        period,
-        frequencyTimes,
-        frequencyHours,
       }
     },
   },
@@ -477,25 +412,32 @@ export default {
   max-width: 456px;
 }
 
-.summary {
-  display: flex;
-  align-items: center;
-  margin-top: -8px;
-  & + & {
-    margin-top: 16px;
+@include r($hd) {
+  .create {
+    &__content {
+      margin-top: 18px;
+    }
   }
-  &__label {
-    color: $colorGray;
-    padding-right: 24px;
+
+  .panel {
+    &__title {
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+    &__section {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
   }
-  &__value {
-    margin-left: auto;
-    font-weight: 600;
-    font-size: 16px;
-    text-align: right;
-    &.disabled {
-      color: $colorGray;
-      font-weight: 400;
+}
+
+@include r($xl) {
+  // .create{
+  // }
+
+  .panel {
+    &.sticky {
+      top: 84px;
     }
   }
 }

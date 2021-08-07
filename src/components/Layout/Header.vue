@@ -1,6 +1,15 @@
 <template>
   <div class="header">
     <div class="header__wrapper">
+      <div
+        class="header__hamburger hamburger hamburger--squeeze"
+        :class="[sidebarOpened && 'is-active']"
+        @click="toggleHamburger"
+      >
+        <div class="hamburger-box">
+          <div class="hamburger-inner"></div>
+        </div>
+      </div>
       <div class="header__logo">
         <SvgIcon name="logo" />
       </div>
@@ -59,19 +68,28 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex"
+
 export default {
   data: () => ({
     userMenuOpened: false,
   }),
-
+  computed: {
+    ...mapState("ui", ["sidebarOpened"]),
+  },
   methods: {
+    toggleHamburger() {
+      this.setSidebar(!this.sidebarOpened)
+    },
     closeUserMenu() {
       this.userMenuOpened = false
     },
     toggleUserMenu() {
       this.userMenuOpened = !this.userMenuOpened
     },
-    logout() {},
+
+    ...mapMutations("ui", ["setSidebar"]),
+    ...mapActions("auth", ["logout"]),
   },
 }
 </script>
@@ -85,10 +103,20 @@ export default {
   z-index: 9;
   background: $colorPrimary;
   color: white;
+  transform: translate3d(0, 0, 0);
   &__wrapper {
     display: flex;
     align-items: center;
     padding: 26px 56px;
+  }
+  &__hamburger {
+    flex: 0 0 auto;
+    display: none;
+    transform: translateY(3px);
+    transition: opacity 0.25s $ease;
+    &:hover {
+      opacity: 0.7;
+    }
   }
   &__logo {
     flex: 0 0 auto;
@@ -99,7 +127,7 @@ export default {
   }
   &__menu {
     flex: 0 1 auto;
-    margin-left: 150px;
+    margin-left: 160px;
   }
   &__menu-list {
     list-style: none;
@@ -253,6 +281,54 @@ export default {
       &:hover {
         background: $colorBg;
       }
+    }
+  }
+}
+
+@include r($hd) {
+  .header {
+    &__logo {
+      .svg-icon {
+        font-size: 32px;
+      }
+    }
+    &__menu {
+      margin-left: 105px;
+    }
+  }
+}
+
+@include r($xl) {
+  .header {
+    &__wrapper {
+      padding: 9px 20px;
+    }
+    &__hamburger {
+      margin-right: 16px;
+    }
+    &__logo {
+      .svg-icon {
+        font-size: 29px;
+      }
+    }
+    &__menu {
+      margin-left: 110px;
+    }
+    &__balance {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    &__user-avatar {
+      width: 42px;
+      height: 42px;
+    }
+  }
+}
+
+@include r($md) {
+  .header {
+    &__hamburger {
+      display: block;
     }
   }
 }

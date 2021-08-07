@@ -32,7 +32,7 @@ const mutations = {
       email: null,
     }
 
-    localStorage.setItem("auth_token", null)
+    localStorage.removeItem("auth_token")
   },
   updateToken(state, token) {
     if (token) {
@@ -67,18 +67,18 @@ const actions = {
     return result
   },
   async logout({ commit, dispatch }) {
-    const [err, result] = await logoutService()
+    // const [err, result] = await logoutService()
 
-    if (err) throw err
+    // if (err) throw err
 
     commit("logOut")
 
     // dispatch("chat/disconnect", null, { root: true })
     // commit("chat/resetMessages", null, { root: true })
 
-    this.$router.push("/")
+    // this.$router.push("/")
 
-    return result
+    // return result
   },
   async refreshToken({ commit }, request) {
     const [err, result] = await refreshTokenService(request)

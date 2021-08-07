@@ -21,6 +21,18 @@
 }
 
 // desktop first utils
+@include r($hd) {
+  .hd-hidden {
+    display: none !important;
+  }
+}
+
+@include r($xl) {
+  .xl-hidden {
+    display: none !important;
+  }
+}
+
 @include r($lg) {
   .lg-hidden {
     display: none !important;
@@ -41,6 +53,18 @@
 
 
 // mobile first utils
+@include rmin($hd + 1) {
+  .hd-visible {
+    display: none !important;
+  }
+}
+
+@include rmin($xl + 1) {
+  .xl-visible {
+    display: none !important;
+  }
+}
+
 @include rmin($lg + 1) {
   .lg-visible {
     display: none !important;

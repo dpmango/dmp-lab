@@ -3,7 +3,11 @@
     <div class="page__content">
       <Header />
       <div class="dashboard">
-        <div class="dashboard__sidebar">
+        <div
+          class="dashboard__sidebar"
+          :class="[sidebarOpened && 'active']"
+          v-click-outside="closeSidebar"
+        >
           <Sidebar />
         </div>
         <div class="dashboard__content">
@@ -15,12 +19,24 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex"
+
 export default {
   data: () => ({}),
   computed: {
     classesApp() {
       return this.$route.matched.map(({ meta }) => meta.app)
     },
+    ...mapState("ui", ["sidebarOpened"]),
+  },
+  methods: {
+    closeSidebar(e) {
+      e.stopPropagation()
+      // if (this.sidebarOpened) {
+      //   this.setSidebar(false)
+      // }
+    },
+    ...mapMutations("ui", ["setSidebar"]),
   },
   watch: {
     // isAuthenticated(v) {
@@ -47,8 +63,8 @@ export default {
   }
   &__sidebar {
     position: fixed;
+    z-index: 8;
     top: 100px;
-    // flex: 0 0 336px;
     max-width: 336px;
     height: calc(100vh - 100px);
     background: white;
@@ -57,8 +73,6 @@ export default {
     position: relative;
     z-index: 1;
     margin-left: 336px;
-    // flex: 0 0 calc(100% - 336px);
-    // max-width: calc(100% - 336px);
     max-width: 100%;
     background: #f5f7fb;
     padding: 32px 56px 32px 40px;
@@ -68,12 +82,9 @@ export default {
 @include r($hd) {
   .dashboard {
     &__sidebar {
-      // flex: 0 0 272px;
       max-width: 272px;
     }
     &__content {
-      // flex: 0 0 calc(100% - 272px);
-      // max-width: calc(100% - 272px);
       margin-left: 272px;
       max-width: 100%;
     }
@@ -82,13 +93,42 @@ export default {
 
 @include r($xl) {
   .dashboard {
+    padding-top: 60px;
     &__sidebar {
       flex: 0 0 235px;
       max-width: 235px;
+      top: 60px;
+      height: calc(100vh - 60px);
     }
     &__content {
-      flex: 0 0 calc(100% - 235px);
-      max-width: calc(100% - 235px);
+      margin-left: 235px;
+      padding-right: 20px;
+      padding-left: 32px;
+    }
+  }
+}
+
+@include r($lg) {
+  // .dashboard {
+  // }
+}
+
+@include r($md) {
+  .dashboard {
+    &__sidebar {
+      box-shadow: 0 0 20px rgba(black, 0.1);
+      transform: translate3d(-100%, 0, 0);
+      pointer-events: none;
+      will-change: transform;
+      transition: transform 0.25s $ease;
+      &.active {
+        transform: none;
+        pointer-events: all;
+      }
+    }
+    &__content {
+      margin-left: 0;
+      padding-left: 20px;
     }
   }
 }

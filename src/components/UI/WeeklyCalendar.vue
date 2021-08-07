@@ -11,7 +11,8 @@
 
     <div class="calendar__day" v-for="day in days" :key="day.id">
       <div class="calendar__day-title">
-        <span>{{ day.label }}</span>
+        <span class="hd-hidden">{{ day.label[0] }}</span>
+        <span class="hd-visible">{{ day.label[1] }}</span>
       </div>
       <div class="calendar__cells">
         <div
@@ -48,13 +49,13 @@ export default {
     },
     days() {
       const days = [
-        "Понедельник",
-        "Вторник",
-        "Среда",
-        "Четверг",
-        "Пятница",
-        "Суббота",
-        "Воскресенье",
+        ["Понедельник", "Пн"],
+        ["Вторник", "Вт"],
+        ["Среда", "Ср"],
+        ["Четверг", "Чт"],
+        ["Пятница", "Пт"],
+        ["Суббота", "Сб"],
+        ["Воскресенье", "Вс"],
       ]
 
       return days.map((day, idx) => ({
@@ -169,6 +170,20 @@ export default {
     color: white;
     font-weight: 600;
     font-size: 12px;
+  }
+}
+
+@include r($hd) {
+  .calendar {
+    &__head-spacer {
+      flex-basis: 41px;
+    }
+    &__day-title {
+      flex-basis: 41px;
+      span {
+        font-size: 12px;
+      }
+    }
   }
 }
 </style>

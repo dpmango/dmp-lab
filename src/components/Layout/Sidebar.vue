@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" @click.stop>
     <ul class="sidebar__menu">
       <li>
         <router-link to="/dashboard" class="link">
@@ -50,6 +50,19 @@
     </div>
   </div>
 </template>
+
+<script>
+// import { mapState, mapMutations } from "vuex"
+
+export default {
+  // computed: {
+  //   ...mapState("ui", ["sidebarOpened"]),
+  // },
+  // methods: {
+  //   ...mapMutations("ui", ["setSidebar"]),
+  // },
+}
+</script>
 
 <style scoped lang="scss">
 .sidebar {
@@ -149,6 +162,13 @@
     &__text {
       font-size: 12px;
     }
+  }
+}
+
+@include r($xl) {
+  .sidebar {
+    padding-left: 20px;
+    padding-top: 26px;
   }
 }
 </style>
