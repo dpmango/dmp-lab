@@ -1,5 +1,5 @@
 import { defineRule, configure, Form, Field } from "vee-validate"
-import { required, email, alpha, confirmed, min, max } from "@vee-validate/rules"
+import { required, email, alpha, confirmed, min, max, numeric } from "@vee-validate/rules"
 
 const veeValidate = (app) => {
   // defineRule("required", { ...required, message: "Это поле не может быть пустым" })
@@ -19,6 +19,7 @@ const veeValidate = (app) => {
   defineRule("confirmed", confirmed)
   defineRule("min", min)
   defineRule("max", max)
+  defineRule("numeric", numeric)
 
   defineRule("tel", (value) => {
     if (!value) return false

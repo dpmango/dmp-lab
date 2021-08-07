@@ -1,23 +1,24 @@
 <template>
-  <label
-    :for="uid"
-    class="checkbox"
-    :class="[{ 'has-error': error }, { 'no-label': !label }, theme]"
-  >
-    <div class="checkbox__input">
+  <label :for="uid" class="radio" :class="[{ 'has-error': error }, { 'no-label': !label }, theme]">
+    <div class="radio__input">
       <input
         :id="uid"
-        type="checkbox"
+        type="radio"
         :checked="value"
         :value="value"
         v-bind="$attrs"
         @input="setValue"
       />
-      <div class="checkbox__input-box">
+      <div class="radio__input-box">
         <SvgIcon name="check" />
       </div>
     </div>
-    <div class="checkbox__label" v-if="label">{{ label }}</div>
+    <div class="radio__content">
+      <div class="radio__label" v-if="label">{{ label }}</div>
+      <div class="radio__helper" v-if="helper">
+        {{ helper }}
+      </div>
+    </div>
   </label>
 </template>
 
@@ -25,7 +26,7 @@
 import uniqueId from "lodash/uniqueId"
 
 export default {
-  name: "Checkbox",
+  name: "Radio",
   props: {
     value: {
       type: Boolean,
@@ -37,6 +38,10 @@ export default {
     },
     error: {
       type: [String, Boolean],
+      required: false,
+    },
+    helper: {
+      type: String,
       required: false,
     },
     theme: {
@@ -58,24 +63,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.checkbox {
+.radio {
   position: relative;
   display: inline-flex;
-  align-items: center;
   cursor: pointer;
   &.no-label {
     display: block;
   }
+  &__content {
+    padding-top: 4px;
+    padding-left: 8px;
+  }
   &__label {
     position: relative;
     z-index: 2;
-    font-size: 15px;
-    padding-left: 16px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.5;
+    text-transform: uppercase;
     cursor: pointer;
     transition: opacity 0.25s $ease;
     &:hover {
       opacity: 0.8;
     }
+  }
+  &__helper {
+    margin-top: 6px;
+    font-size: 12px;
+    color: $colorGray;
   }
   &__input {
     position: relative;
@@ -87,13 +102,9 @@ export default {
       width: 0.1px;
       height: 0.1px;
       overflow: hidden;
-      &:checked + .checkbox__input-box {
+      &:checked + .radio__input-box {
         background: $colorPrimary;
-        border-color: transparent;
-        .svg-icon {
-          opacity: 1;
-          transform: scale(1);
-        }
+        color: white;
       }
     }
   }
@@ -104,16 +115,14 @@ export default {
     justify-content: center;
     width: 16px;
     height: 16px;
-    background: transparent;
-    border: 1px solid #cdced9;
-    color: white;
-    border-radius: 2px;
+    background: $colorBg;
+    // border: 1px solid #cdced9;
+    // color: white;
+    color: $colorGray;
+    border-radius: 50%;
+    transition: 0.25s $ease;
     .svg-icon {
-      font-size: 9px;
-      opacity: 0;
-      transform: scale(0);
-      will-change: transform;
-      transition: opacity 0.25s $ease, transform 0.25s $ease;
+      font-size: 7px;
     }
   }
 }

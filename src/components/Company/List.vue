@@ -1,7 +1,7 @@
 <template>
   <div class="panel">
     <DashboardHead
-      @onCreateBtnClick="() => null"
+      @onCreateBtnClick="$router.push('/company/create')"
       createBtnText="Создать Компанию"
       @onPauseClick="handlePauseClick"
       @onCopyClick="handleCopyClick"

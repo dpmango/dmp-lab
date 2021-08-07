@@ -134,7 +134,7 @@ export default {
   &__icon {
     flex: 0 0 auto;
     font-size: 0px;
-    transition: color 0.25s $ease;
+    transition: color 0.25s $ease, opacity 0.25s $ease;
     .svg-icon {
       font-size: 16px;
     }
@@ -159,13 +159,16 @@ export default {
     }
   }
   &.outline {
-    color: $colorPrimary;
+    color: $fontColor;
     background: transparent;
     border-color: $colorPrimary;
     &:hover,
     &:active {
       border-color: $colorPrimaryHover;
-      color: $colorPrimaryHover;
+      color: $colorPrimary;
+    }
+    &:active {
+      background: rgba($colorPrimaryHover, 0.2);
     }
   }
   &.danger {

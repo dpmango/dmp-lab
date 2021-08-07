@@ -21,6 +21,7 @@
     background: $colorPrimary;
     border-radius: 8px;
     color: white;
+    transition: background 0.25s $ease;
   }
   &__text {
     font-weight: bold;
@@ -28,6 +29,17 @@
     text-transform: uppercase;
     color: $colorPrimary;
     margin-left: 8px;
+    transition: color 0.25s $ease;
+  }
+  &:hover {
+    .create-btn {
+      &__icon {
+        background: $colorPrimaryHover;
+      }
+      &__text {
+        color: $colorPrimaryHover;
+      }
+    }
   }
 }
 </style>

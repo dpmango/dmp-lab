@@ -39,6 +39,8 @@
         <span>Отмена</span>
       </span>
     </div>
+
+    <div class="input__helper" v-if="helper">{{ helper }}</div>
   </div>
 </template>
 
@@ -66,6 +68,10 @@ export default {
       required: false,
     },
     iconPosition: {
+      type: String,
+      required: false,
+    },
+    helper: {
       type: String,
       required: false,
     },
@@ -194,8 +200,8 @@ export default {
       }
       &:focus,
       &:active {
-        background: white;
         outline: none;
+        border-color: $colorGray;
       }
       &:hover {
         // background-color: #f7f6f7;
@@ -289,6 +295,13 @@ export default {
     &:hover {
       color: $fontColor;
     }
+  }
+  &__helper {
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: (20 / 12);
+    letter-spacing: -0.01em;
+    color: $colorGray;
   }
   &.has-error {
     .input__input {

@@ -24,6 +24,12 @@ const routes = [
     meta: { protected: true },
   },
   {
+    path: "/company/create",
+    name: "Create company",
+    component: () => import("@/views/CompanyCreate.vue"),
+    meta: { protected: true },
+  },
+  {
     path: "/profile",
     name: "Profile",
     component: () => import("@/views/Profile.vue"),

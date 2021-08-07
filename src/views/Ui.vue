@@ -86,6 +86,7 @@ export default {
       "calendar",
       "caret",
       "check",
+      "check-boxed",
       "copy",
       "dashboard",
       "document",

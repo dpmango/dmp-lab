@@ -85,7 +85,7 @@
                     </DatePicker>
                   </div>
                   <div class="col col-6">
-                    <DatePicker v-model="time" mode="time" :timezone="timezone">
+                    <DatePicker v-model="time" mode="time">
                       <template v-slot="{ inputValue, inputEvents }">
                         <UiInput
                           theme="dynamic"
@@ -161,7 +161,6 @@ export default {
       email: null,
       date: null,
       time: new Date(),
-      timezone: "",
       topic: null,
       comment: null,
     }

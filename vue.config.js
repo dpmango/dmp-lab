@@ -1,4 +1,7 @@
 module.exports = {
+  devServer: {
+    host: "localhost",
+  },
   css: {
     loaderOptions: {
       scss: {
@@ -8,6 +11,10 @@ module.exports = {
   },
   chainWebpack: (config) => {
     config.module.rules.delete("svg")
+
+    if (process.env.NODE_ENV === "development") {
+      config.output.filename("[name].[hash].js").end()
+    }
   },
   configureWebpack: {
     module: {
