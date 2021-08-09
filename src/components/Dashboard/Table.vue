@@ -59,6 +59,7 @@ export default {
 .table {
   width: 100%;
   border-collapse: collapse;
+  background: white;
   th {
     font-weight: 600;
     font-size: 14px;

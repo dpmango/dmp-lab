@@ -127,7 +127,7 @@ export default {
       width: 12px;
       height: 12px;
       background: #fff;
-      border: 2px solid $borderColor;
+      border: 2px solid $colorPrimary;
       border-radius: 100px;
       transition: 0.25s $ease;
     }

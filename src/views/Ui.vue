@@ -97,6 +97,7 @@ export default {
       "layers",
       "logo",
       "pause",
+      "play",
       "plus",
       "report",
       "rouble",

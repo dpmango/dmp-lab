@@ -28,7 +28,8 @@
 </template>
 
 <script>
-import tableSelectAll from "@/mixins/tableSelectAll"
+import { mapGetters } from "vuex"
+import { tableSelectAll } from "@/mixins"
 import { columns, rows } from "./mockData"
 import { useToast } from "vue-toastification"
 
@@ -41,7 +42,6 @@ export default {
   },
   data() {
     return {
-      view: "list",
       columns: columns,
       rows: rows,
       selectedRows: [],
@@ -50,6 +50,12 @@ export default {
         total: 30,
       },
     }
+  },
+  computed: {
+    selectedCount() {
+      return this.selectedRows.length
+    },
+    ...mapGetters("ads", ["filterView"]),
   },
   methods: {
     handlePauseClick() {
