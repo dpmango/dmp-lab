@@ -1,0 +1,66 @@
+.vc-popover-content-wrapper{
+  .vc-container{
+    background: #FFFFFF;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0px 50px 48px rgba(11, 14, 87, 0.12);
+    border-radius: 4px;
+  }
+
+  .vc-pane{
+    border-right: 1px solid #E8E8E8;
+    &:last-child{
+      border-right: 0
+    }
+  }
+  .vc-header{
+    padding: 32px 16px 18px;
+  }
+  .vc-title{
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: capitalize;
+  }
+  .vc-arrows-container{
+    padding-top: 26px;
+    padding-bottom: 18px;
+  }
+
+  .vc-weekday{
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+  }
+
+  .vc-day{
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+
+  }
+
+  .vc-day-content{
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #666666;
+    &[style*="900"]{
+      color: $colorPrimary !important;
+    }
+  }
+
+  .vc-highlight{
+    background: $colorPrimary !important;
+    border-radius: 4px !important;
+    border: 1px solid $colorPrimary !important;
+    &.vc-highlight-base-middle{
+      background: transparent !important;
+      border: 1px solid $colorPrimary !important;
+      border-radius: 4px !important;
+    }
+    &.vc-highlight-base-end, &.vc-highlight-base-start{
+      border-radius: 4px !important;
+    }
+  }
+}

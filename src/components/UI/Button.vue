@@ -146,6 +146,14 @@ export default {
     }
   }
 
+  &__text {
+    display: inline-flex;
+    align-items: center;
+    ::v-deep .checkbox {
+      pointer-events: none;
+    }
+  }
+
   &.primary {
     background: $colorPrimary;
     color: #fff;

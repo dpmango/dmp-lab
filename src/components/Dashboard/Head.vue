@@ -4,6 +4,11 @@
       <CreateBtn @click="$emit('onCreateBtnClick')">{{ createBtnText }}</CreateBtn>
     </div>
     <div class="head__actions">
+      <UiButton theme="clear" size="small" @click="$emit('onSelectAll')">
+        <UiCheckbox :value="allSelected" />
+        <span class="c-gray">&nbsp;&nbsp;{{ selectedCount }}</span>
+        <span>&nbsp;&nbsp;Выделить все</span>
+      </UiButton>
       <UiButton theme="clear" size="small" iconLeft="pause" @click="$emit('onPauseClick')">
         Остановить
       </UiButton>
@@ -12,13 +17,19 @@
       </UiButton>
     </div>
     <div class="head__calendar">
-      <UiButton theme="clear" size="small" iconLeft="calendar" iconRight="caret:8">
-        <DatePicker v-model="date" :columns="$screens({ default: 1, lg: 2 })" is-range>
-          <template v-slot="{ inputValue, togglePopover }">
-            <span @click="togglePopover">{{ inputValue.start }} - {{ inputValue.end }}</span>
-          </template>
-        </DatePicker>
-      </UiButton>
+      <DatePicker v-model="date" :columns="$screens({ default: 1, lg: 2 })" is-range>
+        <template v-slot="{ inputValue, togglePopover }">
+          <UiButton
+            theme="clear"
+            size="small"
+            iconLeft="calendar"
+            iconRight="caret:8"
+            @click="togglePopover"
+          >
+            <span> {{ inputValue.start }} - {{ inputValue.end }}</span>
+          </UiButton>
+        </template>
+      </DatePicker>
     </div>
     <div
       class="head__view"
@@ -36,6 +47,8 @@ import { mapMutations, mapGetters } from "vuex"
 export default {
   props: {
     createBtnText: String,
+    selectedCount: Number,
+    allSelected: Boolean,
   },
   data() {
     return {}
@@ -70,6 +83,8 @@ export default {
     flex: 0 0 auto;
   }
   &__actions {
+    display: flex;
+    align-items: center;
     margin-left: auto;
     margin-right: auto;
   }

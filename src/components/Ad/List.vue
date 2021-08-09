@@ -3,12 +3,23 @@
     <DashboardHead
       @onCreateBtnClick="() => null"
       createBtnText="Создать Объявление"
+      :allSelected="allSelected"
+      :selectedCount="selectedCount"
       @onPauseClick="handlePauseClick"
       @onCopyClick="handleCopyClick"
+      @onSelectAll="handleSelectAll"
     />
 
     <div class="panel__content">
-      <DashboardTable :selectable="true" :columns="columns" :rows="rows" />
+      <DashboardTable
+        :selectable="true"
+        :columns="columns"
+        :rows="rows"
+        :selectedRows="selectedRows"
+        :allSelected="allSelected"
+        @onSelectAll="handleSelectAll"
+        @onSelect="handleSelect"
+      />
     </div>
     <div class="panel__pagination">
       <UiPagination :meta="pagination" @onChange="paginationSelect" />
@@ -17,10 +28,12 @@
 </template>
 
 <script>
+import tableSelectAll from "@/mixins/tableSelectAll"
 import { columns, rows } from "./mockData"
 import { useToast } from "vue-toastification"
 
 export default {
+  mixins: [tableSelectAll],
   setup() {
     const toast = useToast()
 

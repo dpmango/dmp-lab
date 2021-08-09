@@ -2,7 +2,7 @@
   <table class="table">
     <thead>
       <th v-if="selectable" class="selectable">
-        <UiCheckbox :value="selectAll" @onChange="(v) => (selectAll = v)" />
+        <UiCheckbox :value="allSelected" @onChange="(v) => $emit('onSelectAll')" />
       </th>
       <th class="toggle"></th>
       <th
@@ -16,7 +16,10 @@
     <tbody>
       <tr v-for="tr in rows" :key="tr.id">
         <td v-if="selectable" class="selectable">
-          <UiCheckbox />
+          <UiCheckbox
+            :value="selectedRows.includes(tr.id)"
+            @onChange="(v) => $emit('onSelect', tr.id)"
+          />
         </td>
         <td class="toggle">
           <UiToggle :value="tr.active" />
@@ -39,15 +42,15 @@
 
 <script>
 export default {
-  data() {
-    return {
-      selectAll: false,
-    }
-  },
   props: {
     selectable: Boolean,
     columns: Array,
     rows: Array,
+    allSelected: Boolean,
+    selectedRows: {
+      type: Array,
+      default: () => [],
+    },
   },
 }
 </script>
@@ -88,6 +91,7 @@ export default {
     &.selectable {
       padding-left: 16px;
       padding-right: 16px;
+      width: 48px;
     }
     &.toggle {
       padding-left: 6px;
