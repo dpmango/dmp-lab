@@ -85,6 +85,7 @@ export default {
       max-width: 272px;
     }
     &__content {
+      padding-top: 24px;
       margin-left: 272px;
       max-width: 100%;
     }
@@ -104,6 +105,7 @@ export default {
       margin-left: 235px;
       padding-right: 20px;
       padding-left: 32px;
+      padding-top: 32px;
     }
   }
 }

@@ -10,10 +10,10 @@
         <span>&nbsp;&nbsp;Выделить все</span>
       </UiButton>
       <UiButton theme="clear" size="small" iconLeft="pause" @click="$emit('onPauseClick')">
-        Остановить
+        <span class="hd-hidden">Остановить</span>
       </UiButton>
       <UiButton theme="clear" size="small" iconLeft="copy" @click="$emit('onCopyClick')">
-        Дублировать
+        <span class="hd-hidden">Дублировать</span>
       </UiButton>
     </div>
     <div class="head__calendar">

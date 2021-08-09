@@ -93,34 +93,9 @@ export default {
   }
 }
 
-.head {
-  display: flex;
-  align-items: center;
-  &__create {
-    flex: 0 0 auto;
-  }
-  &__actions {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  &__calendar {
-    margin-left: auto;
-  }
-  &__view {
-    font-size: 0;
-    margin-left: 14px;
-    color: #dadada;
-    cursor: pointer;
-    transition: color 0.25s $ease;
-    .svg-icon {
-      font-size: 24px;
-    }
-    &:hover {
-      color: rgba($colorPrimary, 0.5);
-    }
-    &.is-grid-view {
-      color: $colorPrimary;
-    }
+@include r($hd) {
+  .panel {
+    margin-top: 24px;
   }
 }
 </style>

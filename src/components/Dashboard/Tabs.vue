@@ -136,4 +136,12 @@ export default {
     }
   }
 }
+
+@include r($hd) {
+  .tab {
+    &__name {
+      font-size: 16px;
+    }
+  }
+}
 </style>

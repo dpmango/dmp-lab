@@ -109,7 +109,7 @@
 }
 
 // responsive (desktop first)
-$sizes: ("xl": $xl, "lg": $lg, "md": $md, "sm": $sm);
+$sizes: ("hd": $hd, "xl": $xl, "lg": $lg, "md": $md, "sm": $sm);
 
 @each $size, $px in $sizes {
   @include r(#{$px}) {

@@ -1,7 +1,7 @@
 <template>
   <div class="grid">
     <div class="row">
-      <div class="col col-3" v-for="row in rows" :key="row.id">
+      <div class="col col-3 col-hd-4 col-md-6 col-sm-12" v-for="row in rows" :key="row.id">
         <div class="card">
           <div class="card__head">
             <div class="card__head-main">
@@ -65,6 +65,9 @@ export default {
 }
 
 .card {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
   position: relative;
   z-index: 1;
   background: #ffffff;
@@ -102,6 +105,7 @@ export default {
     line-height: 150%;
   }
   &__content {
+    margin-top: auto;
     padding: 18px 24px;
     border-top: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
@@ -115,6 +119,7 @@ export default {
     }
   }
   &__row-label {
+    padding-right: 12px;
     font-size: 18px;
     line-height: 22px;
     letter-spacing: -0.02em;
@@ -133,6 +138,20 @@ export default {
     padding: 16px 24px;
     display: flex;
     align-items: center;
+  }
+}
+
+@include r($hd) {
+  .card {
+    &__title {
+      font-size: 16px;
+    }
+    &__row-label {
+      font-size: 16px;
+    }
+    &__row-value {
+      font-size: 18px;
+    }
   }
 }
 </style>

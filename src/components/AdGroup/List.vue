@@ -12,12 +12,22 @@
 
     <div class="panel__content">
       <DashboardTable
+        v-if="filterView === 'list'"
         :selectable="true"
         :columns="columns"
         :rows="rows"
         :selectedRows="selectedRows"
         :allSelected="allSelected"
         @onSelectAll="handleSelectAll"
+        @onSelect="handleSelect"
+      />
+      <DashboardGrid
+        v-if="filterView === 'grid'"
+        :selectable="true"
+        :columns="columns"
+        :rows="rows"
+        :selectedRows="selectedRows"
+        :allSelected="allSelected"
         @onSelect="handleSelect"
       />
     </div>
@@ -79,11 +89,15 @@ export default {
     padding: 16px 24px 16px 16px;
     background: #ffffff;
   }
-  &__content {
-    background: #ffffff;
-  }
+
   &__pagination {
     margin-top: 26px;
+  }
+}
+
+@include r($hd) {
+  .panel {
+    margin-top: 24px;
   }
 }
 </style>
