@@ -83,6 +83,9 @@ export default {
     border-top: 1px solid #ececec;
     vertical-align: center;
     transition: background 0.1s $ease;
+    .badge {
+      white-space: nowrap;
+    }
   }
   th,
   td {
@@ -98,6 +101,16 @@ export default {
       padding-left: 6px;
       padding-right: 6px;
       width: 48px;
+    }
+  }
+}
+
+@include r($lg) {
+  .table {
+    th,
+    td {
+      padding-left: 8px;
+      padding-right: 8px;
     }
   }
 }

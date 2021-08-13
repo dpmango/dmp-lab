@@ -1,35 +1,37 @@
 <template>
   <div class="panel">
-    <DashboardHead
-      @onCreateBtnClick="() => null"
-      createBtnText="Создать Объявление"
-      :allSelected="allSelected"
-      :selectedCount="selectedCount"
-      @onPauseClick="handlePauseClick"
-      @onCopyClick="handleCopyClick"
-      @onSelectAll="handleSelectAll"
-    />
-
     <div class="panel__content">
-      <DashboardTable
-        v-if="filterView === 'list'"
-        :selectable="true"
-        :columns="columns"
-        :rows="rows"
-        :selectedRows="selectedRows"
-        :allSelected="allSelected"
-        @onSelectAll="handleSelectAll"
-        @onSelect="handleSelect"
-      />
-      <DashboardGrid
-        v-if="filterView === 'grid'"
-        :selectable="true"
-        :columns="columns"
-        :rows="rows"
-        :selectedRows="selectedRows"
-        :allSelected="allSelected"
-        @onSelect="handleSelect"
-      />
+      <div class="panel__scroller">
+        <DashboardHead
+          @onCreateBtnClick="() => null"
+          createBtnText="Создать Объявление"
+          :allSelected="allSelected"
+          :selectedCount="selectedCount"
+          @onPauseClick="handlePauseClick"
+          @onCopyClick="handleCopyClick"
+          @onSelectAll="handleSelectAll"
+        />
+
+        <DashboardTable
+          v-if="filterView === 'list'"
+          :selectable="true"
+          :columns="columns"
+          :rows="rows"
+          :selectedRows="selectedRows"
+          :allSelected="allSelected"
+          @onSelectAll="handleSelectAll"
+          @onSelect="handleSelect"
+        />
+        <DashboardGrid
+          v-if="filterView === 'grid'"
+          :selectable="true"
+          :columns="columns"
+          :rows="rows"
+          :selectedRows="selectedRows"
+          :allSelected="allSelected"
+          @onSelect="handleSelect"
+        />
+      </div>
     </div>
     <div class="panel__pagination">
       <UiPagination :meta="pagination" @onChange="paginationSelect" />
@@ -85,7 +87,14 @@ export default {
 <style scoped lang="scss">
 .panel {
   margin-top: 36px;
-
+  &__content {
+    position: relative;
+    min-width: 1px;
+    overflow-x: auto;
+  }
+  &__scroller {
+    min-width: 1000px;
+  }
   &__pagination {
     margin-top: 26px;
   }

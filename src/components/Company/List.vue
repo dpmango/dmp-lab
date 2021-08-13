@@ -1,35 +1,36 @@
 <template>
   <div class="panel">
-    <DashboardHead
-      @onCreateBtnClick="$router.push('/company/create')"
-      createBtnText="Создать Компанию"
-      :allSelected="allSelected"
-      :selectedCount="selectedCount"
-      @onPauseClick="handlePauseClick"
-      @onCopyClick="handleCopyClick"
-      @onSelectAll="handleSelectAll"
-    />
-
     <div class="panel__content">
-      <DashboardTable
-        v-if="filterView === 'list'"
-        :selectable="true"
-        :columns="columns"
-        :rows="rows"
-        :selectedRows="selectedRows"
-        :allSelected="allSelected"
-        @onSelectAll="handleSelectAll"
-        @onSelect="handleSelect"
-      />
-      <DashboardGrid
-        v-if="filterView === 'grid'"
-        :selectable="true"
-        :columns="columns"
-        :rows="rows"
-        :selectedRows="selectedRows"
-        :allSelected="allSelected"
-        @onSelect="handleSelect"
-      />
+      <div class="panel__scroller">
+        <DashboardHead
+          @onCreateBtnClick="$router.push('/company/create')"
+          createBtnText="Создать Компанию"
+          :allSelected="allSelected"
+          :selectedCount="selectedCount"
+          @onPauseClick="handlePauseClick"
+          @onCopyClick="handleCopyClick"
+          @onSelectAll="handleSelectAll"
+        />
+        <DashboardTable
+          v-if="filterView === 'list'"
+          :selectable="true"
+          :columns="columns"
+          :rows="rows"
+          :selectedRows="selectedRows"
+          :allSelected="allSelected"
+          @onSelectAll="handleSelectAll"
+          @onSelect="handleSelect"
+        />
+        <DashboardGrid
+          v-if="filterView === 'grid'"
+          :selectable="true"
+          :columns="columns"
+          :rows="rows"
+          :selectedRows="selectedRows"
+          :allSelected="allSelected"
+          @onSelect="handleSelect"
+        />
+      </div>
     </div>
     <div class="panel__pagination">
       <UiPagination :meta="pagination" @onChange="paginationSelect" />
@@ -87,6 +88,14 @@ export default {
   &__head {
     padding: 16px 24px 16px 16px;
     background: #ffffff;
+  }
+  &__content {
+    position: relative;
+    min-width: 1px;
+    overflow-x: auto;
+  }
+  &__scroller {
+    min-width: 1000px;
   }
   &__pagination {
     margin-top: 26px;

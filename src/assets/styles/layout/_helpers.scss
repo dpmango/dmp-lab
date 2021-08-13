@@ -51,6 +51,18 @@
   }
 }
 
+@include r($mb) {
+  .mb-hidden {
+    display: none !important;
+  }
+}
+
+@include r($mbs) {
+  .mbs-hidden {
+    display: none !important;
+  }
+}
+
 
 // mobile first utils
 @include rmin($hd + 1) {
@@ -79,6 +91,18 @@
 
 @include rmin($sm + 1) {
   .sm-visible {
+    display: none !important;
+  }
+}
+
+@include rmin($mb + 1) {
+  .mb-visible {
+    display: none !important;
+  }
+}
+
+@include rmin($mbs + 1) {
+  .mbs-visible {
     display: none !important;
   }
 }

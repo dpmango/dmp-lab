@@ -61,6 +61,7 @@ export default {
 .toggle {
   position: relative;
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   cursor: pointer;
   &.no-label {

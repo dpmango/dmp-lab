@@ -1,12 +1,12 @@
 <template>
   <div class="breadcrumbs">
     <div class="breadcrumbs__list">
-      <div class="crumb first" v-if="includeHome">
+      <router-link to="/dashboard" class="crumb first" v-if="includeHome">
         <div class="crumb__icon">
           <SvgIcon name="dashboard" />
         </div>
         <div class="crumb__title">Дашборд</div>
-      </div>
+      </router-link>
       <router-link :to="item.to" class="crumb" v-for="(item, idx) in list" :key="idx">
         <div class="crumb__separator">
           <SvgIcon name="dots" />
@@ -76,6 +76,7 @@ export default {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: -12px;
   }
   &__title {
     display: flex;
@@ -101,11 +102,13 @@ export default {
 .crumb {
   display: inline-flex;
   align-items: center;
+  margin-bottom: 12px;
   &__icon {
     flex: 0 0 auto;
     font-size: 0;
     color: $colorPrimary;
     margin-right: 8px;
+    transition: color 0.25s $ease;
     .svg-icon {
       font-size: 14px;
     }
@@ -122,6 +125,7 @@ export default {
   &__title {
     font-size: 16px;
     font-weight: 500;
+    transition: color 0.25s $ease;
   }
   &.first {
     .crumb__icon,
@@ -132,6 +136,12 @@ export default {
   &::after {
     display: inline-block;
     content: "";
+  }
+  &:hover {
+    .crumb__icon,
+    .crumb__title {
+      color: $colorPrimary;
+    }
   }
 }
 

@@ -33,6 +33,23 @@
           <span class="link__text">Пользователи</span>
         </router-link>
       </li> -->
+      <li class="md-visible">
+        <router-link to="/" class="link">
+          <i class="link__icon">
+            <SvgIcon name="play" />
+          </i>
+          <span class="link__text">Начало работы</span>
+        </router-link>
+      </li>
+
+      <li class="md-visible">
+        <router-link to="/ui" class="link">
+          <i class="link__icon">
+            <SvgIcon name="plus" />
+          </i>
+          <span class="link__text">Интерфейс</span>
+        </router-link>
+      </li>
     </ul>
 
     <div class="sidebar__bottom">

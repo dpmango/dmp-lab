@@ -91,6 +91,7 @@ export default {
       "dashboard",
       "document",
       "dots",
+      "edit",
       "filter",
       "folder",
       "grid-view",

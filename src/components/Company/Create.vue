@@ -4,7 +4,7 @@
 
     <Form ref="form" as="form" class="create__content" @submit="handleSubmit">
       <div class="row">
-        <div class="col col-8">
+        <div class="col col-8 col-sm-12">
           <div class="panel">
             <h3 class="panel__title h3-title">Название кампании</h3>
             <div class="panel__section">
@@ -34,7 +34,7 @@
               <div class="h5-title">Укажите лимит</div>
               <div class="limits mt-1">
                 <div class="row">
-                  <div class="col col-5">
+                  <div class="col col-5 col-mb-12">
                     <UiRadioGroup
                       label="Выберите тип"
                       :activeId="limitTypeId"
@@ -42,9 +42,9 @@
                       @onChange="(id) => (limitTypeId = id)"
                     />
                   </div>
-                  <div class="col col-7">
+                  <div class="col col-7 col-mb-12">
                     <div class="row">
-                      <div class="col col-6">
+                      <div class="col col-6 col-mbs-12">
                         <Field
                           v-model="limit"
                           name="limit"
@@ -59,7 +59,7 @@
                           />
                         </Field>
                       </div>
-                      <div class="col col-6">
+                      <div class="col col-6 col-mbs-12">
                         <Field
                           v-model="limitTotal"
                           name="limitTotal"
@@ -176,7 +176,7 @@
 
               <div class="frequency">
                 <div class="row">
-                  <div class="col col-6">
+                  <div class="col col-6 col-mbs-12">
                     <Field
                       v-model="frequencyTimes"
                       name="frequencyTimes"
@@ -191,7 +191,7 @@
                       />
                     </Field>
                   </div>
-                  <div class="col col-6">
+                  <div class="col col-6 col-mbs-12">
                     <Field
                       v-model="frequencyHours"
                       name="frequencyHours"
@@ -212,7 +212,7 @@
           </div>
         </div>
 
-        <div class="col col-4">
+        <div class="col col-4 col-sm-12">
           <div class="panel sticky">
             <h3 class="panel__title h3-title">Основные настройки</h3>
 
@@ -405,6 +405,10 @@ export default {
 
 .calendar {
   max-width: 849px;
+  overflow-x: auto;
+  .calendar {
+    min-width: 600px;
+  }
 }
 
 .frequency {
@@ -438,6 +442,14 @@ export default {
   .panel {
     &.sticky {
       top: 84px;
+    }
+  }
+}
+
+@include r(600) {
+  .allocation {
+    ::v-deep .radiogroup__item {
+      flex: 0 0 100%;
     }
   }
 }

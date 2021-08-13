@@ -108,4 +108,14 @@ export default {
     }
   }
 }
+
+@include r($hd) {
+  .head {
+    &__actions {
+      ::v-deep .button__icon {
+        margin-right: 0;
+      }
+    }
+  }
+}
 </style>

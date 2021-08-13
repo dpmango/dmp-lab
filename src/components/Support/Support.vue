@@ -4,14 +4,14 @@
 
     <Form ref="form" as="form" class="support__content" @submit="handleSubmit">
       <div class="row">
-        <div class="col col-6">
+        <div class="col col-6 col-xl-12">
           <div class="panel">
             <h3 class="panel__title h3-title">Ваши данные</h3>
             <div class="panel__section">
               <UiError :error="error" />
 
               <div class="row">
-                <div class="col col-6">
+                <div class="col col-6 col-mb-12">
                   <Field
                     v-model="name"
                     name="name"
@@ -21,7 +21,7 @@
                     <UiInput theme="dynamic" label="ФИО" :error="errorMessage" v-bind="field" />
                   </Field>
                 </div>
-                <div class="col col-6">
+                <div class="col col-6 col-mb-12">
                   <Field v-model="company" name="company" v-slot="{ errorMessage, field }">
                     <UiInput
                       theme="dynamic"
@@ -31,7 +31,7 @@
                     />
                   </Field>
                 </div>
-                <div class="col col-6">
+                <div class="col col-6 col-mb-12">
                   <Field
                     v-model="phone"
                     name="phone"
@@ -47,7 +47,7 @@
                     />
                   </Field>
                 </div>
-                <div class="col col-6">
+                <div class="col col-6 col-mb-12">
                   <Field
                     v-model="email"
                     name="email"
@@ -70,7 +70,7 @@
 
               <div class="mt-1">
                 <div class="row">
-                  <div class="col col-6">
+                  <div class="col col-6 col-mb-12">
                     <DatePicker v-model="date">
                       <template v-slot="{ inputValue, inputEvents }">
                         <UiInput
@@ -84,7 +84,7 @@
                       </template>
                     </DatePicker>
                   </div>
-                  <div class="col col-6">
+                  <div class="col col-6 col-mb-12">
                     <DatePicker v-model="time" mode="time">
                       <template v-slot="{ inputValue, inputEvents }">
                         <UiInput
@@ -105,7 +105,7 @@
         </div>
 
         <!-- next panel -->
-        <div class="col col-5">
+        <div class="col col-5 col-hd-6 col-xl-12">
           <div class="panel">
             <h3 class="panel__title h3-title">Ваши данные</h3>
             <div class="panel__section">
@@ -196,6 +196,9 @@ export default {
 .support {
   &__content {
     margin-top: 32px;
+    .error {
+      margin-bottom: 16px;
+    }
   }
   &__cta {
     margin-top: 25px;
@@ -203,6 +206,7 @@ export default {
 }
 
 .panel {
+  flex: 1 0 auto;
   background: #ffffff;
   border-radius: 4px;
   &__title {
@@ -214,6 +218,21 @@ export default {
     border-bottom: 1px solid #e8e8e8;
     &:last-child {
       border-bottom: 0;
+    }
+  }
+}
+
+@include r($hd) {
+  .support {
+    &__content {
+      margin-top: 18px;
+    }
+  }
+
+  .panel {
+    &__title {
+      padding-top: 18px;
+      padding-bottom: 18px;
     }
   }
 }

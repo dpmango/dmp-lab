@@ -330,6 +330,17 @@ export default {
     &__hamburger {
       display: block;
     }
+    &__menu {
+      display: none;
+    }
+  }
+}
+
+@include r(580) {
+  .header {
+    &__balance {
+      display: none;
+    }
   }
 }
 </style>

@@ -2,9 +2,9 @@
   <div class="auth">
     <div class="container">
       <div class="auth__wrapper">
-        <div class="auth__logo">
+        <router-link to="/" class="auth__logo">
           <SvgIcon name="logo" />
-        </div>
+        </router-link>
         <div class="auth__box">
           <slot />
         </div>
@@ -40,11 +40,16 @@ export default {
     padding: 56px 0;
   }
   &__logo {
+    display: block;
     color: $colorPrimary;
     font-size: 0;
     text-align: center;
+    transition: color 0.25s $ease;
     .svg-icon {
       font-size: 36px;
+    }
+    &:hover {
+      color: rgba($colorPrimary, 0.7);
     }
   }
   &__box {

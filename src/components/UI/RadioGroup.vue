@@ -93,6 +93,9 @@ export default {
       color: $colorGray;
       transition: color 0.25s $ease;
     }
+    ::v-deep .button__text {
+      display: block;
+    }
     ::v-deep .button__icon {
       position: absolute;
       left: 8px;

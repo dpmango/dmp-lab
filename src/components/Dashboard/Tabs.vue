@@ -1,7 +1,7 @@
 <template>
   <div class="tabs">
     <div class="row">
-      <div class="col col-4">
+      <div class="col col-4 col-mb-12">
         <div class="tab" :class="[activeTab === 1 && 'active']" @click="$emit('onTabChange', 1)">
           <div class="tab__title">
             <div class="tab__icon">
@@ -12,7 +12,7 @@
           <div class="tab__meta">0 выбрано</div>
         </div>
       </div>
-      <div class="col col-4">
+      <div class="col col-4 col-mb-12">
         <div class="tab" :class="[activeTab === 2 && 'active']" @click="$emit('onTabChange', 2)">
           <div class="tab__title">
             <div class="tab__icon">
@@ -23,7 +23,7 @@
           <div class="tab__meta">0 выбрано</div>
         </div>
       </div>
-      <div class="col col-4">
+      <div class="col col-4 col-mb-12">
         <div class="tab" :class="[activeTab === 3 && 'active']" @click="$emit('onTabChange', 3)">
           <div class="tab__title">
             <div class="tab__icon">
@@ -139,6 +139,22 @@ export default {
 
 @include r($hd) {
   .tab {
+    &__name {
+      font-size: 16px;
+    }
+  }
+}
+
+@include r($md) {
+  .tab {
+    &__meta {
+      display: none;
+    }
+  }
+}
+@include r($sm) {
+  .tab {
+    padding: 20px 16px;
     &__name {
       font-size: 16px;
     }
