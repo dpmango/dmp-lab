@@ -150,6 +150,8 @@
 </template>
 
 <script>
+import djs from "dayjs"
+
 export default {
   data() {
     return {
@@ -187,6 +189,14 @@ export default {
       //     //   })
       //     // }
       //   })
+    },
+  },
+  watch: {
+    date(val) {
+      const valDjs = djs(val)
+      const timeDjs = djs(this.time)
+
+      this.time = djs(`${valDjs.format("YYYY-MM-DD")} ${timeDjs.format("HH:mm")}`).toDate()
     },
   },
 }

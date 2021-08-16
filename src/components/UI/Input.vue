@@ -119,7 +119,8 @@ export default {
     // },
     getLabel() {
       return typeof this.error === "string" && !this.isFocused
-        ? this.parseVeeError(this.error)
+        ? // ? this.parseVeeError(this.error)
+          this.label
         : this.label
     },
   },

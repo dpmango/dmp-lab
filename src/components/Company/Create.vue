@@ -242,6 +242,7 @@
 
 <script>
 import Summary from "./partials/Summary"
+import djs from "dayjs"
 
 export default {
   components: { Summary },
@@ -339,6 +340,14 @@ export default {
       //     //   })
       //     // }
       //   })
+    },
+  },
+  watch: {
+    date(val) {
+      const valDjs = djs(val)
+      const timeDjs = djs(this.time)
+
+      this.time = djs(`${valDjs.format("YYYY-MM-DD")} ${timeDjs.format("HH:mm")}`).toDate()
     },
   },
 }
