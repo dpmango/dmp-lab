@@ -174,21 +174,22 @@ export default {
         return
       }
 
-      const { name, company } = this
-      // await this.login({ email, password })
-      //   .then((_res) => {
-      //     this.error = null
-      //     this.$router.push("/dashboard")
-      //   })
-      //   .catch((err) => {
-      //     this.error = err
-      //     // const { data, code } = err
-      //     // if (data && code === 401) {
-      //     //   Object.keys(data).forEach((key) => {
-      //     //     this.error = data[key]
-      //     //   })
-      //     // }
-      //   })
+      const { name, company, phone, email, topic, descriptionProblem, comment } = this
+      await this.postTicket({
+        fio: name,
+        nameCampaign: company,
+        phone,
+        email,
+        theme: topic,
+        descriptionProblem: comment,
+      })
+        .then((_res) => {
+          this.error = null
+          this.$router.push("/dashboard")
+        })
+        .catch((err) => {
+          this.error = err.data
+        })
     },
   },
   watch: {

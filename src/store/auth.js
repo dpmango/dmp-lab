@@ -1,5 +1,6 @@
 import {
   loginService,
+  userService,
   logoutService,
   refreshTokenService,
   passwordChangeService,
@@ -54,16 +55,22 @@ const actions = {
       commit("updateToken", token)
     }
   },
-  async login({ commit }, request) {
+  async login({ commit, dispatch }, request) {
     const [err, result] = await loginService(request)
 
-    console.log("login action", err)
     if (err) throw err
 
-    const { token, user } = result
+    const [errUser, user] = await dispatch("getUser")
 
-    commit("updateToken", token)
-    commit("updateUser", user)
+    return user
+  },
+  async getUser({ commit }) {
+    const [err, result] = await userService()
+
+    if (err) throw err
+
+    console.log(result)
+    // const { token, user } = result
 
     return result
   },

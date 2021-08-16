@@ -11,6 +11,7 @@ const handleError = async (error) => {
 // create instance
 const api = axios.create({
   baseURL: "https://api.dmplab.ru/v1",
+  withCredentials: true,
   headers: {
     common: {
       "Content-Type": "application/json",

@@ -7,4 +7,7 @@ export default {
     logout: `${auth}/logout/`,
     passwordChange: `${auth}/profile/password/`,
   },
+  support: {
+    ticket: "/support/ticket/",
+  },
 }

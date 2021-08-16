@@ -46,15 +46,15 @@ export const passwordChangeService = async (request) => {
   }
 }
 
-// export const userService = async () => {
-//   try {
-//     const { data } = await $api.get(endpoints.auth.user)
+export const userService = async () => {
+  try {
+    const { data } = await $api.get(endpoints.auth.user)
 
-//     return [null, mapData(data)]
-//   } catch (error) {
-//     return [mapApiError(error), null]
-//   }
-// }
+    return [null, mapData(data)]
+  } catch (error) {
+    return [mapApiError(error), null]
+  }
+}
 
 export const updateUserService = async (request) => {
   try {

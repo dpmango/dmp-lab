@@ -1,8 +1,9 @@
 import { createStore } from "vuex"
 import ui from "./ui"
-import auth from "./auth"
 import router from "./router"
+import auth from "./auth"
 import ads from "./ads"
+import support from "./support"
 
 export default createStore({
   // state: {},
@@ -14,8 +15,9 @@ export default createStore({
   },
   modules: {
     ui,
-    auth,
     router,
+    auth,
     ads,
+    support,
   },
 })
