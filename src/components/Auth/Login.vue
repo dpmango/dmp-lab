@@ -75,13 +75,8 @@ export default {
           this.$router.push("/dashboard")
         })
         .catch((err) => {
-          this.error = err
-          // const { data, code } = err
-          // if (data && code === 401) {
-          //   Object.keys(data).forEach((key) => {
-          //     this.error = data[key]
-          //   })
-          // }
+          console.log("catched an error", err)
+          this.error = err.data
         })
     },
     ...mapActions("auth", ["login"]),

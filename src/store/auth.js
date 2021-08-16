@@ -57,6 +57,7 @@ const actions = {
   async login({ commit }, request) {
     const [err, result] = await loginService(request)
 
+    console.log("login action", err)
     if (err) throw err
 
     const { token, user } = result

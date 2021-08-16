@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const handleError = async (error) => {
-  if (error.response && !error.response.config.url.includes("rest-auth")) {
+  if (error.response && !error.response.config.url.includes("auth")) {
     if (parseInt(error.response && error.response.status) === 401) {
       // await store.dispatch('auth/logout');
     }
@@ -10,12 +10,12 @@ const handleError = async (error) => {
 
 // create instance
 const api = axios.create({
-  baseURL: "https://test.me/",
+  baseURL: "https://api.dmplab.ru/v1",
   headers: {
     common: {
       "Content-Type": "application/json",
-      Accept: "*/*",
-      "X-Requested-With": "XMLHttpRequest",
+      // Accept: "*/*",
+      // "X-Requested-With": "XMLHttpRequest",
     },
   },
 })

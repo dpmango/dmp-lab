@@ -3,44 +3,15 @@ import endpoints from "./endpoints"
 import { mapApiError, mapData } from "./helpers"
 
 export const loginService = async (request) => {
-  // TODO - FAKE API
-  const fakeApi = () => {
-    return new Promise((resolve, reject) => {
-      const emailRegex =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-      if (request.password && request.password.length <= 5) {
-        reject("Wrong password !")
-      } else if (request.email && !emailRegex.test(request.email)) {
-        reject("Wrong email !")
-      } else {
-        resolve({
-          data: {
-            token: "abcdefg",
-            user: { email: request.email },
-          },
-        })
-      }
-    })
-  }
-
   try {
-    const { data } = await fakeApi()
+    const { data } = await $api.post(endpoints.auth.login, {
+      ...request,
+    })
 
     return [null, mapData(data)]
   } catch (error) {
-    return [error, null]
+    return [mapApiError(error), null]
   }
-
-  // try {
-  //   const { data } = await $api.post(endpoints.auth.login, {
-  //     ...request,
-  //   })
-
-  //   return [null, mapData(data)]
-  // } catch (error) {
-  //   return [mapApiError(error), null]
-  // }
 }
 
 export const logoutService = async () => {

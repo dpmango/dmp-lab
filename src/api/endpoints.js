@@ -1,12 +1,10 @@
-const auth = "/rest-auth"
-const api = "/api"
+const auth = "/auth"
 
 export default {
   auth: {
-    user: `${auth}/user/`,
+    user: `/profile/me/`,
     login: `${auth}/login/`,
     logout: `${auth}/logout/`,
-    refreshToken: `${auth}/token-refresh/`,
-    passwordChange: `${auth}/password/change/`,
+    passwordChange: `${auth}/profile/password/`,
   },
 }
