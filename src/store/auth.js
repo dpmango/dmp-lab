@@ -1,16 +1,10 @@
-import {
-  loginService,
-  userService,
-  logoutService,
-  refreshTokenService,
-  passwordChangeService,
-  updateUserService,
-} from "@/api/auth"
+import { loginService, userService, passwordChangeService, updateUserService } from "@/api/auth"
 
 const state = () => ({
-  token: null,
   user: {
-    email: null,
+    firstName: null,
+    lastName: null,
+    balance: 0,
   },
 })
 
@@ -18,28 +12,18 @@ const getters = {
   user: (state) => {
     return state.user
   },
-  token: (state) => {
-    return state.token
-  },
   isAuthenticated: (state) => {
-    return !!state.token
+    // return !!state.token
+    return state.user.firstName !== null
   },
 }
 
 const mutations = {
   logOut(state) {
-    state.token = null
     state.user = {
-      email: null,
-    }
-
-    localStorage.removeItem("auth_token")
-  },
-  updateToken(state, token) {
-    if (token) {
-      state.token = token
-
-      localStorage.setItem("auth_token", token)
+      firstName: null,
+      lastName: null,
+      balance: 0,
     }
   },
   updateUser(state, user) {
@@ -48,19 +32,12 @@ const mutations = {
 }
 
 const actions = {
-  checkToken({ commit }) {
-    const token = localStorage.getItem("auth_token", null)
-
-    if (token) {
-      commit("updateToken", token)
-    }
-  },
   async login({ commit, dispatch }, request) {
     const [err, result] = await loginService(request)
 
     if (err) throw err
 
-    const [errUser, user] = await dispatch("getUser")
+    const user = await dispatch("getUser")
 
     return user
   },
@@ -69,10 +46,11 @@ const actions = {
 
     if (err) throw err
 
-    console.log(result)
-    // const { token, user } = result
+    const { success, response } = result
 
-    return result
+    commit("updateUser", response)
+
+    return response
   },
   async logout({ commit, dispatch }) {
     // const [err, result] = await logoutService()
@@ -87,17 +65,6 @@ const actions = {
     // this.$router.push("/")
 
     // return result
-  },
-  async refreshToken({ commit }, request) {
-    const [err, result] = await refreshTokenService(request)
-
-    if (err);
-
-    const { token } = result
-
-    commit("updateToken", token)
-
-    return result
   },
   async passwordChange({ commit, _dispatch }, request) {
     const [err, result] = await passwordChangeService(request)

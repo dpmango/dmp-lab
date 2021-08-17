@@ -12,8 +12,8 @@ export default {
       loading: true,
     }
   },
-  created() {
-    this.$store.dispatch("init")
+  async created() {
+    await this.$store.dispatch("init")
 
     this.$router.beforeEach((to, from, next) => {
       if (to.meta && to.meta.protected && !this.isAuthenticated) next({ name: "Login" })
@@ -27,9 +27,6 @@ export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"]),
     // ...mapMutations("router", ["setFromRoute"]),
-  },
-  methods: {
-    ...mapActions("auth", ["checkToken"]),
   },
   watch: {
     $route(to, from) {

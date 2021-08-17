@@ -12,7 +12,7 @@ export const supportTicketService = async (request) => {
     @param theme (String; min: ~; max: ~; required)
     @param descriptionProblem (String; min: ~; max: ~; required)
     **/
-    const { data } = await $api.patch(endpoints.support.ticket, request)
+    const { data } = await $api.post(endpoints.support.ticket, request)
 
     return [null, mapData(data)]
   } catch (error) {

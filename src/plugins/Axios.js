@@ -25,10 +25,6 @@ api.interceptors.request.use(
   (x) => {
     console.log(`${x.method.toUpperCase()} | ${x.url}`, x.params, x.data)
 
-    const token = localStorage.getItem("auth_token")
-
-    if (token) x.headers.common.authorization = `Bearer ${token}`
-
     return x
   },
   async (error) => {

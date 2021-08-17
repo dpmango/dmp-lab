@@ -30,9 +30,6 @@ const actions = {
   // async login({ commit }, request) {
   //   const [err, result] = await loginService(request)
   //   if (err) throw err
-  //   const { token, user } = result
-  //   commit("updateToken", token)
-  //   commit("updateUser", user)
   //   return result
   // },
 }

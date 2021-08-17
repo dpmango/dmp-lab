@@ -9,8 +9,8 @@ export default createStore({
   // state: {},
   // mutations: {},
   actions: {
-    init({ dispatch }) {
-      dispatch("auth/checkToken", { root: true })
+    async init({ dispatch }) {
+      await dispatch("auth/getUser", { root: true })
     },
   },
   modules: {

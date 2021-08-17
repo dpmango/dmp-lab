@@ -115,6 +115,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
   data() {
     return {
@@ -126,6 +128,12 @@ export default {
       passwordMode: "password",
     }
   },
+  created() {
+    this.updateInputFields()
+  },
+  computed: {
+    ...mapGetters("auth", ["user"]),
+  },
   methods: {
     togglePassword() {
       if (this.passwordMode === "password") {
@@ -135,6 +143,9 @@ export default {
         this.passwordMode = "password"
         this.password = "123456"
       }
+    },
+    updateInputFields() {
+      this.name = `${this.user.firstName} ${this.user.lastName}`
     },
     async handleSubmit() {
       const isValid = await this.$refs.form.validate()
@@ -159,6 +170,11 @@ export default {
       //     //   })
       //     // }
       //   })
+    },
+  },
+  watch: {
+    user() {
+      this.updateInputFields()
     },
   },
 }

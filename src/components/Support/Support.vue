@@ -22,7 +22,12 @@
                   </Field>
                 </div>
                 <div class="col col-6 col-mb-12">
-                  <Field v-model="company" name="company" v-slot="{ errorMessage, field }">
+                  <Field
+                    v-model="company"
+                    name="company"
+                    v-slot="{ errorMessage, field }"
+                    rules="required"
+                  >
                     <UiInput
                       theme="dynamic"
                       label="Название компании"
@@ -150,9 +155,16 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
 import djs from "dayjs"
+import { useToast } from "vue-toastification"
 
 export default {
+  setup() {
+    const toast = useToast()
+
+    return { toast }
+  },
   data() {
     return {
       crumbs: [{ icon: "support", to: "/support", label: "Обращение в техподдержку" }],
@@ -185,12 +197,15 @@ export default {
       })
         .then((_res) => {
           this.error = null
+          this.toast.success("Обращение успешно отправлено")
           this.$router.push("/dashboard")
         })
         .catch((err) => {
           this.error = err.data
+          this.toast.error("Ошибка при отправлении сообщения")
         })
     },
+    ...mapActions("support", ["postTicket"]),
   },
   watch: {
     date(val) {

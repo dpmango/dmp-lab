@@ -1,10 +1,13 @@
 export const mapApiError = (error) => {
   const response = error.response
   const data = response.data
+  const status = response.status || data.error.status
   let message = data.error.message
 
+  // ориентироваться первично на http коды
+  // далее обрабатывать если статус 200 и success
   if (!data.success) {
-    switch (data.error.status) {
+    switch (status) {
       case 500:
         message = "Ошибка сервера"
         break
@@ -20,7 +23,7 @@ export const mapApiError = (error) => {
 
     return {
       data: message,
-      code: data.error.status,
+      code: status,
     }
   }
 }
