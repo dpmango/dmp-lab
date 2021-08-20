@@ -1,15 +1,15 @@
 <template>
   <div class="badge" :class="[`status-${status}`]">
-    <span v-if="status === 1">НА МОДЕРАЦИИ</span>
-    <span v-else-if="status === 2">ОТКЛОНЕНА</span>
-    <span v-else-if="status === 3">ОДОБРЕНА</span>
+    <span v-if="status === 'moderation'">НА МОДЕРАЦИИ</span>
+    <span v-else-if="status === 'rejection'">ОТКЛОНЕНА</span>
+    <span v-else-if="status === 'approved'">ОДОБРЕНА</span>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    status: Number,
+    status: String,
   },
 }
 </script>
@@ -27,20 +27,20 @@ export default {
     line-height: 150%;
     text-transform: uppercase;
   }
-  &.status-1 {
+  &.status-moderation {
     border-color: #89a7e0;
     span {
       color: #5691c8;
     }
   }
-  &.status-2 {
+  &.status-rejection {
     background: $colorRed;
     border-color: transparent;
     span {
       color: white;
     }
   }
-  &.status-3 {
+  &.status-approved {
     border-color: $colorGreen;
     span {
       color: $colorGreen;

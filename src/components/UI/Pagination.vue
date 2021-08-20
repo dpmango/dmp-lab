@@ -3,7 +3,7 @@
     <div class="pagination__list">
       <div
         class="pagination__item"
-        :class="[item === meta.current && 'is-active']"
+        :class="[item === meta.page && 'is-active']"
         v-for="(item, idx) in items"
         :key="idx"
       >
@@ -32,26 +32,26 @@ export default {
   },
   computed: {
     items() {
-      const { total, current } = this.meta
+      const { page, count, limit } = this.meta
 
-      return paginationBuilder(current, total)
+      return paginationBuilder(page, count / limit)
     },
     prevAvailable() {
-      return this.meta.current > 1
+      return this.meta.page > 1
     },
     nextAvailable() {
-      return this.meta.current < this.meta.total
+      return this.meta.page < this.meta.count * this.meta.limit
     },
   },
   methods: {
     handlePrev() {
       if (this.prevAvailable) {
-        this.$emit("onChange", this.meta.current - 1)
+        this.$emit("onChange", this.meta.page - 1)
       }
     },
     handleNext() {
       if (this.nextAvailable) {
-        this.$emit("onChange", this.meta.current + 1)
+        this.$emit("onChange", this.meta.page + 1)
       }
     },
   },

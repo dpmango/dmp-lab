@@ -20,6 +20,8 @@ export const paginationBuilder = (currentPage, pageCount) => {
     end: Math.round(currentPage + delta / 2),
   }
 
+  console.log(range)
+
   if (range.start - 1 === 1 || range.end + 1 === pageCount) {
     range.start += 1
     range.end += 1

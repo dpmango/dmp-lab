@@ -1,4 +1,7 @@
 const auth = "/auth"
+const campaign = "/campaign"
+const groupAd = "/groupAd"
+const ad = "/ad"
 
 export default {
   auth: {
@@ -10,4 +13,7 @@ export default {
   support: {
     ticket: "/support/ticket/",
   },
+  campaign: `${campaign}`,
+  groupAd: `${groupAd}`,
+  ad: `${ad}`,
 }

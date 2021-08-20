@@ -30,6 +30,7 @@
           :key="idx"
         >
           <template v-if="td.type === 'number'">{{ td.content }}</template>
+          <template v-else-if="td.type === 'date'">{{ getTimeStamp(td.content) }}</template>
           <template v-else-if="td.type === 'status'">
             <StatusBadge :status="td.content" />
           </template>
@@ -41,6 +42,8 @@
 </template>
 
 <script>
+import djs from "dayjs"
+
 export default {
   props: {
     selectable: Boolean,
@@ -50,6 +53,11 @@ export default {
     selectedRows: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    getTimeStamp(d) {
+      return djs(d).format("DD.MM.YYYY")
     },
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="grid">
-    <div class="row">
+    <div class="row m0">
       <div class="col col-3 col-hd-4 col-md-6 col-sm-12" v-for="row in rows" :key="row.id">
         <div class="card">
           <div class="card__head">
@@ -62,6 +62,10 @@ export default {
 <style scoped lang="scss">
 .grid {
   margin-top: 24px;
+}
+
+.row.m0 {
+  margin: -12px 0;
 }
 
 .card {

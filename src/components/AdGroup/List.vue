@@ -16,7 +16,7 @@
           v-if="filterView === 'list'"
           :selectable="true"
           :columns="columns"
-          :rows="rows"
+          :rows="groupAds"
           :selectedRows="selectedRows"
           :allSelected="allSelected"
           @onSelectAll="handleSelectAll"
@@ -26,23 +26,23 @@
           v-if="filterView === 'grid'"
           :selectable="true"
           :columns="columns"
-          :rows="rows"
+          :rows="groupAds"
           :selectedRows="selectedRows"
           :allSelected="allSelected"
           @onSelect="handleSelect"
         />
       </div>
     </div>
-    <div class="panel__pagination">
-      <UiPagination :meta="pagination" @onChange="paginationSelect" />
+    <div class="panel__pagination" v-if="groupAds && groupAds.length">
+      <UiPagination :meta="groupAdsPagination" @onChange="paginationSelect" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 import { tableSelectAll } from "@/mixins"
-import { columns, rows } from "./mockData"
+import { columns } from "./mockData"
 import { useToast } from "vue-toastification"
 
 export default {
@@ -55,19 +55,17 @@ export default {
   data() {
     return {
       columns: columns,
-      rows: rows,
       selectedRows: [],
-      pagination: {
-        current: 1,
-        total: 3,
-      },
     }
+  },
+  created() {
+    this.getGroupAds()
   },
   computed: {
     selectedCount() {
       return this.selectedRows.length
     },
-    ...mapGetters("ads", ["filterView"]),
+    ...mapGetters("ads", ["filterView", "groupAds", "groupAdsPagination"]),
   },
   methods: {
     handlePauseClick() {
@@ -80,6 +78,7 @@ export default {
     paginationSelect(page) {
       this.pagination.current = page
     },
+    ...mapActions("ads", ["getGroupAds"]),
   },
 }
 </script>
@@ -95,6 +94,7 @@ export default {
     position: relative;
     min-width: 1px;
     overflow-x: auto;
+    overflow-y: hidden;
   }
   &__scroller {
     min-width: 1000px;
