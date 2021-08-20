@@ -14,12 +14,12 @@
                 v-model="name"
                 name="name"
                 v-slot="{ errorMessage, field }"
-                rules="required|max:150"
+                rules="required|max:200"
               >
                 <UiInput
                   theme="dynamic"
                   label="Введите название"
-                  helper="Название не должно превышать 150 символов."
+                  helper="Название не должно превышать 200 символов."
                   :error="errorMessage"
                   v-bind="field"
                 />
@@ -243,6 +243,7 @@
 <script>
 import Summary from "./partials/Summary"
 import djs from "dayjs"
+import { mapActions } from "vuex"
 
 export default {
   components: { Summary },
@@ -325,22 +326,66 @@ export default {
         return
       }
 
-      // const { name, company } = this
-      // await this.login({ email, password })
-      //   .then((_res) => {
-      //     this.error = null
-      //     this.$router.push("/dashboard")
-      //   })
-      //   .catch((err) => {
-      //     this.error = err
-      //     // const { data, code } = err
-      //     // if (data && code === 401) {
-      //     //   Object.keys(data).forEach((key) => {
-      //     //     this.error = data[key]
-      //     //   })
-      //     // }
-      //   })
+      const {
+        name, // used
+        limitTypeId, // used
+        limit, // used
+        limitTotal, // used
+        allocationTypeId, // used
+        strategyByView, // used
+        startType, // used
+        date, // used
+        time, // todo - join
+        weeklySlots,
+        frequencyTimes, // used
+        frequencyHours, // used
+      } = this
+
+      const limitTypeById = () => {
+        switch (limitTypeId) {
+          case 1:
+            return "budjet"
+          case 2:
+            return "clicks"
+          case 3:
+            return "impressions"
+          default:
+            return ""
+        }
+      }
+
+      const showTimesBuilder = () => {
+        console.log(weeklySlots)
+
+        return []
+      }
+
+      await this.createCompaign({
+        name,
+        limit: [{ type: limitTypeById(), limit, mainLimit: limitTotal }],
+        typeBudgetAllocate: allocationTypeId === 1 ? "balanced" : "accelerated",
+        typeProcurementStrategy: strategyByView ? "impressions" : "clicks",
+        dateStartCompany: startType === "now" ? djs().toDate() : djs(date).toDate(),
+        // showTimes: showTimesBuilder(),
+        requencyСompanyImpressions: {
+          more: parseInt(frequencyTimes, 10),
+          hours: parseInt(frequencyHours, 10),
+        },
+      })
+        .then((_res) => {
+          this.error = null
+        })
+        .catch((err) => {
+          this.error = err
+          // const { data, code } = err
+          // if (data && code === 401) {
+          //   Object.keys(data).forEach((key) => {
+          //     this.error = data[key]
+          //   })
+          // }
+        })
     },
+    ...mapActions("ads", ["createCompaign"]),
   },
   watch: {
     date(val) {

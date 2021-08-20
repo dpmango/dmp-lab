@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="summary">
-    <div class="summary__label">Суточный лимит</div>
+    <div class="summary__label">Общий лимит</div>
     <div class="summary__value" :class="!data.limitTotal && 'disabled'">
       {{ data.limitTotal || "не указан" }}
     </div>
