@@ -31,16 +31,21 @@ export default {
     meta: Object,
   },
   computed: {
+    countWithLimit() {
+      const { count, limit } = this.meta
+
+      return Math.floor(count / limit)
+    },
     items() {
       const { page, count, limit } = this.meta
 
-      return paginationBuilder(page, count / limit)
+      return paginationBuilder(page, this.countWithLimit)
     },
     prevAvailable() {
       return this.meta.page > 1
     },
     nextAvailable() {
-      return this.meta.page < this.meta.count * this.meta.limit
+      return this.meta.page < this.countWithLimit
     },
   },
   methods: {

@@ -35,6 +35,10 @@
     <div class="panel__pagination" v-if="compaings && compaings.length">
       <UiPagination :meta="compaingsPagination" @onChange="paginationSelect" />
     </div>
+
+    <div class="loader" :class="[loading && 'is-active']">
+      <UiLoader theme="block" :loading="loading" />
+    </div>
   </div>
 </template>
 
@@ -55,10 +59,15 @@ export default {
     return {
       columns: columns,
       selectedRows: [],
+      loading: true,
     }
   },
-  created() {
-    this.getCompaings()
+  async created() {
+    this.loading = true
+
+    await this.getCompaings()
+
+    this.loading = false
   },
   computed: {
     selectedCount() {
@@ -74,8 +83,12 @@ export default {
     handleCopyClick() {
       this.toast.error("Error notification test")
     },
-    paginationSelect(page) {
-      this.pagination.current = page
+    async paginationSelect(page) {
+      this.loading = true
+
+      await this.getCompaings({ page, limit: 15 })
+
+      this.loading = false
     },
     ...mapActions("ads", ["getCompaings"]),
   },
@@ -84,6 +97,7 @@ export default {
 
 <style scoped lang="scss">
 .panel {
+  position: relative;
   margin-top: 36px;
   &__head {
     padding: 16px 24px 16px 16px;
@@ -100,6 +114,22 @@ export default {
   }
   &__pagination {
     margin-top: 26px;
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(white, 0.5);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s $ease;
+  &.is-active {
+    opacity: 1;
+    pointer-events: all;
   }
 }
 

@@ -4,7 +4,7 @@ import { mapApiError, mapData } from "./helpers"
 
 export const getCompaignService = async (request) => {
   try {
-    const { data } = await $api.get(endpoints.campaign, null, {
+    const { data } = await $api.get(endpoints.campaign, {
       params: {
         ...request,
       },
@@ -31,7 +31,7 @@ export const createCompaignService = async (request) => {
 // groups
 export const getGroupAd = async (request) => {
   try {
-    const { data } = await $api.get(endpoints.groupAd, null, {
+    const { data } = await $api.get(endpoints.groupAd, {
       params: {
         ...request,
       },
@@ -46,7 +46,7 @@ export const getGroupAd = async (request) => {
 // ads
 export const getAds = async (request) => {
   try {
-    const { data } = await $api.get(endpoints.ad, null, {
+    const { data } = await $api.get(endpoints.ad, {
       params: {
         ...request,
       },
