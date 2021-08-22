@@ -22,7 +22,7 @@ export const createCompaignService = async (request) => {
   // + typeBudgetAllocate (String; enum: “balanced”, “accelerated”; required)
   // + typeProcurementStrategy (String; enum: “impressions”, “clicks”; required)
   // +/- dateStartCompany (String; format: ISO8601; required)
-  // - showTimes (Array[ShowTimeArr]; required)
+  // + showTimes (Array[ShowTimeArr]; required)
   // + frequencyСompanyImpressions (Object{FCI}; required)
 
   // [LimitsArr]:
@@ -31,10 +31,9 @@ export const createCompaignService = async (request) => {
   // + mainLimit (Integer; min: 1; required)
 
   // [ShowTimeArr]:
-  // - type (String; enum: “monday”, “wednesday”, “thursday”, “friday”, “saturday”, “sunday”;
+  // + type (String; enum: “monday”, “wednesday”, “thursday”, “friday”, “saturday”, “sunday”;
   // required)
-  // - startOf (String; format; DD.MM.YYYY; required)
-  // - endOf (String; format; DD.MM.YYYY; required)
+  // + times (Array; format; HH.MM; required)
 
   // {FCI}:
   // + more (Integer; min: 1; required)

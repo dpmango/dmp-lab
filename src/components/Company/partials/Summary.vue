@@ -76,7 +76,7 @@ export default {
       const frequencyHoursPlural = Plurize(parseInt(this.frequencyHours), "час", "часа", "часов")
 
       const limit = this.limit && `${this.limit} ${limitPlural}`
-      const limitTotal = this.limitTotal && `${this.limitTotal} ${this.limitTotalPlural}`
+      const limitTotal = this.limitTotal && `${this.limitTotal} ${limitTotalPlural}`
       const strategy = this.strategyByView ? "CPM" : "CPC"
       const allocation = this.allocationTypeOptions.find((x) => x.id === this.allocationTypeId)
       const period = null

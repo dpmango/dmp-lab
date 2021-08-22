@@ -243,6 +243,7 @@
 <script>
 import Summary from "./partials/Summary"
 import djs from "dayjs"
+import groupBy from "lodash/groupBy"
 import { mapActions } from "vuex"
 
 export default {
@@ -355,21 +356,53 @@ export default {
       }
 
       const showTimesBuilder = () => {
-        console.log(weeklySlots)
+        const groupedByDay = groupBy(this.weeklySlots, (x) => x.day)
+
+        const getDayTitle = (id) => {
+          const numId = parseInt(id, 10)
+          switch (numId) {
+            case 1:
+              return "monday"
+            case 2:
+              return "tuesday"
+            case 3:
+              return "wednesday"
+            case 4:
+              return "thursday"
+            case 5:
+              return "friday"
+            case 6:
+              return "saturday"
+            case 7:
+              return "sunday"
+            default:
+              return null
+          }
+        }
+        const getTime = (id) => {
+          return `${String(id).padStart(2, "0")}:00`
+        }
+
+        if (Object.keys(groupedByDay).length) {
+          return Object.keys(groupedByDay).map((key) => ({
+            day: getDayTitle(key),
+            times: groupedByDay[key].map((x) => getTime(x.time)),
+          }))
+        }
 
         return []
       }
 
       await this.createCompaign({
         name,
-        limit: [{ type: limitTypeById(), limit, mainLimit: limitTotal }],
+        limits: [{ type: limitTypeById(), limit, mainLimit: limitTotal }],
         typeBudgetAllocate: allocationTypeId === 1 ? "balanced" : "accelerated",
-        typeProcurementStrategy: strategyByView ? "impressions" : "clicks",
+        typeProcurementStrategy: !strategyByView ? "impressions" : "clicks",
         dateStartCompany: startType === "now" ? djs().toDate() : djs(date).toDate(),
-        // showTimes: showTimesBuilder(),
-        requencyСompanyImpressions: {
+        showTimes: showTimesBuilder(),
+        frequencyСompanyImpressions: {
           more: parseInt(frequencyTimes, 10),
-          hours: parseInt(frequencyHours, 10),
+          hour: parseInt(frequencyHours, 10),
         },
       })
         .then((_res) => {
