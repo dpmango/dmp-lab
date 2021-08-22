@@ -13,7 +13,10 @@ export default {
   support: {
     ticket: "/support/ticket/",
   },
-  campaign: `${campaign}`,
+  campaign: {
+    root: `${campaign}`,
+    stop: `${campaign}/stop`,
+  },
   groupAd: `${groupAd}`,
   ad: `${ad}`,
 }

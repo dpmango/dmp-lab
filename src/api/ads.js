@@ -4,7 +4,7 @@ import { mapApiError, mapData } from "./helpers"
 
 export const getCompaignService = async (request) => {
   try {
-    const { data } = await $api.get(endpoints.campaign, {
+    const { data } = await $api.get(endpoints.campaign.root, {
       params: {
         ...request,
       },
@@ -39,7 +39,19 @@ export const createCompaignService = async (request) => {
   // + more (Integer; min: 1; required)
 
   try {
-    const { data } = await $api.post(endpoints.campaign, {
+    const { data } = await $api.post(endpoints.campaign.root, {
+      ...request,
+    })
+
+    return [null, mapData(data)]
+  } catch (error) {
+    return [mapApiError(error), null]
+  }
+}
+
+export const stopCompaignService = async (request) => {
+  try {
+    const { data } = await $api.post(endpoints.campaign.stop, {
       ...request,
     })
 

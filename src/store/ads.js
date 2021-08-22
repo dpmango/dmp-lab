@@ -1,5 +1,11 @@
 // import { loginService } from "@/api/auth"
-import { getCompaignService, createCompaignService, getGroupAd, getAds } from "@/api/ads"
+import {
+  getCompaignService,
+  createCompaignService,
+  stopCompaignService,
+  getGroupAd,
+  getAds,
+} from "@/api/ads"
 
 const state = () => ({
   compaings: {
@@ -148,6 +154,18 @@ const actions = {
     const { success, response } = result
 
     commit("setCompaings", response)
+
+    return response
+  },
+  async stopCompaigns({ commit }, request) {
+    const [err, result] = await stopCompaignService(request)
+
+    if (err) throw err
+
+    const { success, response } = result
+
+    console.log(result, response)
+    // commit("setCompaings", response)
 
     return response
   },

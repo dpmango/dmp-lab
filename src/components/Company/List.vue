@@ -15,7 +15,7 @@
           v-if="filterView === 'list'"
           :selectable="true"
           :columns="columns"
-          :rows="compaings"
+          :rows="rows"
           :selectedRows="selectedRows"
           :allSelected="allSelected"
           @onSelectAll="handleSelectAll"
@@ -25,14 +25,14 @@
           v-if="filterView === 'grid'"
           :selectable="true"
           :columns="columns"
-          :rows="compaings"
+          :rows="rows"
           :selectedRows="selectedRows"
           :allSelected="allSelected"
           @onSelect="handleSelect"
         />
       </div>
     </div>
-    <div class="panel__pagination" v-if="compaings && compaings.length">
+    <div class="panel__pagination" v-if="rows && rows.length">
       <UiPagination :meta="compaingsPagination" @onChange="paginationSelect" />
     </div>
 
@@ -73,15 +73,23 @@ export default {
     selectedCount() {
       return this.selectedRows.length
     },
+    rows() {
+      return this.compaings
+    },
     ...mapGetters("ads", ["filterView", "compaings", "compaingsPagination"]),
   },
   methods: {
-    handlePauseClick() {
-      console.log(this.toast)
-      this.toast.success("Succes notification test")
+    async handlePauseClick() {
+      await this.stopCompaigns({ campaignIds: this.selectedRows })
+        .then((res) => {
+          this.toast.success("Успешно остановлено")
+        })
+        .catch((err) => {
+          this.toast.error("Ошибка при остановке")
+        })
     },
     handleCopyClick() {
-      this.toast.error("Error notification test")
+      // this.toast.error("Error notification test")
     },
     async paginationSelect(page) {
       this.loading = true
@@ -90,7 +98,7 @@ export default {
 
       this.loading = false
     },
-    ...mapActions("ads", ["getCompaings"]),
+    ...mapActions("ads", ["getCompaings", "stopCompaigns"]),
   },
 }
 </script>

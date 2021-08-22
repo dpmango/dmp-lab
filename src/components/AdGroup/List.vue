@@ -16,7 +16,7 @@
           v-if="filterView === 'list'"
           :selectable="true"
           :columns="columns"
-          :rows="groupAds"
+          :rows="rows"
           :selectedRows="selectedRows"
           :allSelected="allSelected"
           @onSelectAll="handleSelectAll"
@@ -26,14 +26,14 @@
           v-if="filterView === 'grid'"
           :selectable="true"
           :columns="columns"
-          :rows="groupAds"
+          :rows="rows"
           :selectedRows="selectedRows"
           :allSelected="allSelected"
           @onSelect="handleSelect"
         />
       </div>
     </div>
-    <div class="panel__pagination" v-if="groupAds && groupAds.length">
+    <div class="panel__pagination" v-if="rows && rows.length">
       <UiPagination :meta="groupAdsPagination" @onChange="paginationSelect" />
     </div>
 
@@ -73,6 +73,9 @@ export default {
   computed: {
     selectedCount() {
       return this.selectedRows.length
+    },
+    rows() {
+      return this.groupAds
     },
     ...mapGetters("ads", ["filterView", "groupAds", "groupAdsPagination"]),
   },
