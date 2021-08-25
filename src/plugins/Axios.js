@@ -1,9 +1,11 @@
 import axios from "axios"
+import auth from "@/store/auth"
 
 const handleError = async (error) => {
   if (error.response && !error.response.config.url.includes("auth")) {
     if (parseInt(error.response && error.response.status) === 401) {
-      // await store.dispatch('auth/logout');
+      await auth.mutations.logOut()
+      // window.location.href = "/"
     }
   }
 }

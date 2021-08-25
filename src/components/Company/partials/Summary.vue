@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { Plurize } from "@/utils"
+import { Plurize, convertDayNameToMini } from "@/utils"
 
 export default {
   props: [
@@ -47,6 +47,7 @@ export default {
     "limitTypeId",
     "frequencyTimes",
     "frequencyHours",
+    "showTimes",
     "strategyByView",
     "allocationTypeOptions",
     "allocationTypeId",
@@ -79,7 +80,9 @@ export default {
       const limitTotal = this.limitTotal && `${this.limitTotal} ${limitTotalPlural}`
       const strategy = this.strategyByView ? "CPM" : "CPC"
       const allocation = this.allocationTypeOptions.find((x) => x.id === this.allocationTypeId)
-      const period = null
+      const period = this.showTimes.reduce((acc, x) => {
+        return `${acc}${convertDayNameToMini(x.day)}: ${x.times.join(", ")} `
+      }, "")
       const frequencyTimes =
         this.frequencyTimes && `Не более ${this.frequencyTimes} ${frequencyTimesPlural}`
       const frequencyHours =

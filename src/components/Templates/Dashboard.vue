@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex"
+import { mapState, mapGetters, mapMutations } from "vuex"
 
 export default {
   data: () => ({}),
@@ -28,6 +28,7 @@ export default {
       return this.$route.matched.map(({ meta }) => meta.app)
     },
     ...mapState("ui", ["sidebarOpened"]),
+    ...mapGetters("auth", ["isAuthenticated"]),
   },
   methods: {
     closeSidebar(e) {
@@ -38,12 +39,13 @@ export default {
     },
     ...mapMutations("ui", ["setSidebar"]),
   },
+
   watch: {
-    // isAuthenticated(v) {
-    //   if (v) {
-    //     this.connectSocket()
-    //   }
-    // },
+    isAuthenticated(v) {
+      if (!v) {
+        this.$router.push("/")
+      }
+    },
   },
 }
 </script>

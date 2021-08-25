@@ -223,6 +223,7 @@
                 :limitTypeId="limitTypeId"
                 :frequencyTimes="frequencyTimes"
                 :frequencyHours="frequencyHours"
+                :showTimes="showTimes"
                 :strategyByView="strategyByView"
                 :allocationTypeOptions="allocationTypeOptions"
                 :allocationTypeId="allocationTypeId"
@@ -245,6 +246,7 @@ import Summary from "./partials/Summary"
 import djs from "dayjs"
 import groupBy from "lodash/groupBy"
 import { mapActions } from "vuex"
+import { covertDayIdToName } from "@/utils"
 
 export default {
   components: { Summary },
@@ -300,6 +302,22 @@ export default {
           return null
       }
     },
+    showTimes() {
+      const groupedByDay = groupBy(this.weeklySlots, (x) => x.day)
+
+      const getTime = (id) => {
+        return `${String(id).padStart(2, "0")}:00`
+      }
+
+      if (Object.keys(groupedByDay).length) {
+        return Object.keys(groupedByDay).map((key) => ({
+          day: covertDayIdToName(key),
+          times: groupedByDay[key].map((x) => getTime(x.time)),
+        }))
+      }
+
+      return []
+    },
   },
   methods: {
     handleWeeklySelect({ time, day }) {
@@ -328,18 +346,17 @@ export default {
       }
 
       const {
-        name, // used
-        limitTypeId, // used
-        limit, // used
-        limitTotal, // used
-        allocationTypeId, // used
-        strategyByView, // used
-        startType, // used
-        date, // used
-        time, // todo - join
-        weeklySlots,
-        frequencyTimes, // used
-        frequencyHours, // used
+        name,
+        limitTypeId,
+        limit,
+        limitTotal,
+        allocationTypeId,
+        strategyByView,
+        startType,
+        date,
+        time,
+        frequencyTimes,
+        frequencyHours,
       } = this
 
       const limitTypeById = () => {
@@ -355,51 +372,30 @@ export default {
         }
       }
 
-      const showTimesBuilder = () => {
-        const groupedByDay = groupBy(this.weeklySlots, (x) => x.day)
+      const getStartTime = () => {
+        if (startType === "now") {
+          return djs().toDate()
+        } else {
+          const dateD = djs(date)
+          const timeD = djs(time)
 
-        const getDayTitle = (id) => {
-          const numId = parseInt(id, 10)
-          switch (numId) {
-            case 1:
-              return "monday"
-            case 2:
-              return "tuesday"
-            case 3:
-              return "wednesday"
-            case 4:
-              return "thursday"
-            case 5:
-              return "friday"
-            case 6:
-              return "saturday"
-            case 7:
-              return "sunday"
-            default:
-              return null
-          }
+          return djs(`${dateD.format("YYYY-MM-DD")} ${timeD.format("HH:mm")}`).toDate()
         }
-        const getTime = (id) => {
-          return `${String(id).padStart(2, "0")}:00`
-        }
-
-        if (Object.keys(groupedByDay).length) {
-          return Object.keys(groupedByDay).map((key) => ({
-            day: getDayTitle(key),
-            times: groupedByDay[key].map((x) => getTime(x.time)),
-          }))
-        }
-
-        return []
       }
 
       await this.createCompaign({
         name,
-        limits: [{ type: limitTypeById(), limit, mainLimit: limitTotal }],
+        limits: [
+          {
+            type: limitTypeById(),
+            limit: parseInt(limit, 10),
+            mainLimit: parseInt(limitTotal, 10),
+          },
+        ],
         typeBudgetAllocate: allocationTypeId === 1 ? "balanced" : "accelerated",
         typeProcurementStrategy: !strategyByView ? "impressions" : "clicks",
-        dateStartCompany: startType === "now" ? djs().toDate() : djs(date).toDate(),
-        showTimes: showTimesBuilder(),
+        dateStartCompany: getStartTime(),
+        showTimes: this.showTimes(),
         frequencyСompanyImpressions: {
           more: parseInt(frequencyTimes, 10),
           hour: parseInt(frequencyHours, 10),
@@ -409,7 +405,7 @@ export default {
           this.error = null
         })
         .catch((err) => {
-          this.error = err
+          this.error = err.data
           // const { data, code } = err
           // if (data && code === 401) {
           //   Object.keys(data).forEach((key) => {

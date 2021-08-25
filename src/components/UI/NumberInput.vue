@@ -66,9 +66,7 @@ export default {
     //   return message.value
     // },
     getLabel() {
-      return typeof this.error === "string" && !this.isFocused
-        ? this.parseVeeError(this.error)
-        : this.label
+      return typeof this.error === "string" && !this.isFocused ? this.label : this.label
     },
   },
   methods: {

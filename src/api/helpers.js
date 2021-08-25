@@ -1,8 +1,9 @@
 export const mapApiError = (error) => {
   const response = error.response
+  console.log(response)
   const data = response.data
   const status = response.status || data.error.status
-  let message = data.error.message
+  let message = (data.error && data.error.message) || ""
 
   // ориентироваться первично на http коды
   // далее обрабатывать если статус 200 и success

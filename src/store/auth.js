@@ -20,10 +20,12 @@ const getters = {
 
 const mutations = {
   logOut(state) {
-    state.user = {
-      firstName: null,
-      lastName: null,
-      balance: 0,
+    if (state) {
+      state.user = {
+        firstName: null,
+        lastName: null,
+        balance: 0,
+      }
     }
   },
   updateUser(state, user) {
