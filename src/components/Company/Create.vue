@@ -362,7 +362,7 @@ export default {
       const limitTypeById = () => {
         switch (limitTypeId) {
           case 1:
-            return "budjet"
+            return "budget"
           case 2:
             return "clicks"
           case 3:
@@ -395,7 +395,7 @@ export default {
         typeBudgetAllocate: allocationTypeId === 1 ? "balanced" : "accelerated",
         typeProcurementStrategy: !strategyByView ? "impressions" : "clicks",
         dateStartCompany: getStartTime(),
-        showTimes: this.showTimes(),
+        showTimes: this.showTimes,
         frequencyСompanyImpressions: {
           more: parseInt(frequencyTimes, 10),
           hour: parseInt(frequencyHours, 10),
