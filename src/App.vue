@@ -13,7 +13,11 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch("init")
+    try {
+      await this.$store.dispatch("init")
+    } catch (e) {
+      this.$router.push("/login")
+    }
 
     this.$router.beforeEach((to, from, next) => {
       if (to.meta && to.meta.protected && !this.isAuthenticated) next({ name: "Login" })

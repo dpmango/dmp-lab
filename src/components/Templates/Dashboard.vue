@@ -39,11 +39,15 @@ export default {
     },
     ...mapMutations("ui", ["setSidebar"]),
   },
-
+  created() {
+    if (!this.isAuthenticated) {
+      this.$router.push("/login")
+    }
+  },
   watch: {
     isAuthenticated(v) {
       if (!v) {
-        this.$router.push("/")
+        this.$router.push("/login")
       }
     },
   },

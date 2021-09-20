@@ -48,8 +48,8 @@ import { mapActions, mapGetters } from "vuex"
 export default {
   data() {
     return {
-      email: null,
-      password: null,
+      email: "test@test.ru",
+      password: "test",
       error: null,
     }
   },
